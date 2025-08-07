@@ -28,6 +28,7 @@ const SlotResultDisplay = ({ roundData }) => {
       startTime: new Date(roundData.createdAt).toLocaleString(),
       endTime: new Date(roundData.endTime).toLocaleString(),
       betAmount: roundData.betAmount,
+      baseBetAmount: roundData.baseBetAmount,
       totalWin: roundData.winAmount,
       currency: roundData.currencyCode,
       totalFreeSpins: roundData.totalFreeSpins,
@@ -201,7 +202,10 @@ const SlotResultDisplay = ({ roundData }) => {
                   </tr>
                 </tbody>
               </table>
-              <div className="footnote">💡 Bet / 20 = Possible Bet Amount</div>
+              <div className="footnote">
+                💡 Bet / {gameData.currency} {gameData.baseBetAmount.toFixed(2)}{" "}
+                = Possible Bet Amount
+              </div>
             </div>
           </div>
         )}
