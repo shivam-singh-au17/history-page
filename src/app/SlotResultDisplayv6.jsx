@@ -256,7 +256,7 @@ const SlotResultDisplay = ({ roundData }) => {
           box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08),
             0 8px 20px rgba(0, 0, 0, 0.04);
           overflow: hidden;
-          max-width: none;
+          100%
           width: 100%;
           margin: 0 auto;
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -277,7 +277,7 @@ const SlotResultDisplay = ({ roundData }) => {
         }
 
         .header {
-          padding: 30px;
+          padding: 20px 15px;
           background: linear-gradient(
             135deg,
             #6366f1 0%,
@@ -315,8 +315,8 @@ const SlotResultDisplay = ({ roundData }) => {
         }
 
         .game-title {
-          margin: 0 0 20px 0;
-          font-size: 28px;
+          margin: 0 0 15px 0;
+          font-size: clamp(20px, 5vw, 28px);
           text-align: center;
           font-weight: 700;
           text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
@@ -328,7 +328,7 @@ const SlotResultDisplay = ({ roundData }) => {
           display: flex;
           justify-content: space-between;
           flex-wrap: wrap;
-          gap: 20px;
+          gap: 10px;
           position: relative;
           z-index: 1;
         }
@@ -337,14 +337,15 @@ const SlotResultDisplay = ({ roundData }) => {
           display: flex;
           flex-direction: column;
           background: rgba(255, 255, 255, 0.15);
-          padding: 12px 16px;
+          padding: 10px 12px;
           border-radius: 12px;
           backdrop-filter: blur(10px);
           border: 1px solid rgba(255, 255, 255, 0.2);
+          flex: 1 1 150px;
         }
 
         .label {
-          font-size: 12px;
+          font-size: clamp(10px, 2vw, 12px);
           opacity: 0.9;
           margin-bottom: 6px;
           text-transform: uppercase;
@@ -354,14 +355,14 @@ const SlotResultDisplay = ({ roundData }) => {
 
         .value {
           font-weight: 600;
-          font-size: 14px;
+          font-size: clamp(12px, 2.5vw, 14px);
         }
 
         .bet-info {
           display: flex;
           flex-wrap: wrap;
-          gap: 20px;
-          padding: 25px 30px;
+          gap: 10px;
+          padding: 15px;
           background: rgba(248, 250, 252, 0.8);
           border-bottom: 1px solid rgba(226, 232, 240, 0.8);
           backdrop-filter: blur(10px);
@@ -370,24 +371,26 @@ const SlotResultDisplay = ({ roundData }) => {
         .bet-info-item {
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 8px;
           background: white;
-          padding: 12px 16px;
+          padding: 8px 12px;
           border-radius: 12px;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
           border: 1px solid rgba(226, 232, 240, 0.6);
+          flex: 1 1 120px;
         }
 
         .bet-info-item .label {
           margin-bottom: 0;
           color: #64748b;
           font-weight: 500;
+          font-size: clamp(10px, 2vw, 12px);
         }
 
         .badge {
-          padding: 4px 12px;
+          padding: 4px 10px;
           border-radius: 20px;
-          font-size: 12px;
+          font-size: clamp(10px, 2vw, 12px);
           font-weight: 600;
         }
 
@@ -404,22 +407,24 @@ const SlotResultDisplay = ({ roundData }) => {
         .status-badge {
           background: #eff6ff;
           color: #1e40af;
-          padding: 4px 12px;
+          padding: 4px 10px;
           border-radius: 20px;
-          font-size: 12px;
+          font-size: clamp(10px, 2vw, 12px);
           font-weight: 600;
         }
 
         .navigation-tabs {
           display: flex;
+          flex-wrap: wrap;
           background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
           border-bottom: 1px solid rgba(226, 232, 240, 0.8);
           position: relative;
         }
 
         .tab-button {
-          flex: 1;
-          padding: 20px;
+          flex: 1 1 33%;
+          min-width: 120px;
+          padding: 15px 10px;
           border: none;
           background: transparent;
           color: #64748b;
@@ -431,18 +436,18 @@ const SlotResultDisplay = ({ roundData }) => {
           align-items: center;
           justify-content: center;
           gap: 8px;
-          font-size: 14px;
+          font-size: clamp(12px, 2.5vw, 14px);
         }
 
         .tab-icon {
-          font-size: 16px;
+          font-size: clamp(14px, 3vw, 16px);
         }
 
-        .tab-button:hover {
-          background: rgba(255, 255, 255, 0.8);
-          color: #475569;
-          transform: translateY(-2px);
-        }
+        // .tab-button:hover {
+        //   background: rgba(255, 255, 255, 0.8);
+        //   color: #475569;
+        //   transform: translateY(-2px);
+        // }
 
         .tab-button.active {
           background: white;
@@ -462,7 +467,7 @@ const SlotResultDisplay = ({ roundData }) => {
         }
 
         .content-section {
-          padding: 30px;
+          padding: 20px 15px;
           width: 100%;
         }
 
@@ -474,10 +479,11 @@ const SlotResultDisplay = ({ roundData }) => {
         .summary-card {
           background: white;
           border-radius: 16px;
-          padding: 24px;
+          padding: 20px;
           box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
           border: 1px solid rgba(226, 232, 240, 0.6);
           width: 100%;
+          overflow-x: auto;
         }
 
         .summary-header {
@@ -501,14 +507,14 @@ const SlotResultDisplay = ({ roundData }) => {
 
         .summary-table {
           width: 100%;
-          border-collapse: separate; /* Changed from collapse for better styling */
+          border-collapse: separate;
           border-spacing: 0;
           margin-bottom: 20px;
-          min-width: 600px; /* Ensure table doesn't get too narrow */
+          min-width: 100%;
         }
 
         .table-header {
-          padding: 16px;
+          padding: 12px 8px;
           text-align: left;
           background: linear-gradient(
             135deg,
@@ -517,7 +523,7 @@ const SlotResultDisplay = ({ roundData }) => {
           );
           color: #6366f1;
           font-weight: 700;
-          font-size: 14px;
+          font-size: clamp(12px, 2.5vw, 14px);
           text-transform: uppercase;
           letter-spacing: 0.5px;
           position: sticky;
@@ -535,10 +541,10 @@ const SlotResultDisplay = ({ roundData }) => {
         }
 
         .table-cell {
-          padding: 16px;
+          padding: 12px 8px;
           border-bottom: 1px solid #e2e8f0;
-          font-size: 14px;
-          vertical-align: middle; /* Better vertical alignment */
+          font-size: clamp(12px, 2.5vw, 14px);
+          vertical-align: middle;
         }
 
         /* Highlight the win amount column */
@@ -592,12 +598,6 @@ const SlotResultDisplay = ({ roundData }) => {
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
-          .summary-table {
-            min-width: 100%; /* Full width on mobile */
-            display: block;
-            overflow-x: auto;
-          }
-
           .table-header,
           .table-cell {
             padding: 12px 8px;
@@ -1388,6 +1388,12 @@ const TumbleView = ({
           display: grid;
           grid-template-columns: 1fr 1fr 1fr;
           gap: 16px;
+        }
+
+        @media (max-width: 480px) {
+          .summary-grid {
+            grid-template-columns: 1fr 1fr;
+          }
         }
 
         .summary-item {
