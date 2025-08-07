@@ -70,18 +70,9 @@ const styles = {
     position: 'relative',
     marginBottom: '20px'
   },
-  inputIcon: {
-    position: 'absolute',
-    left: '16px',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    color: '#9ca3af',
-    fontSize: '18px',
-    zIndex: '1'
-  },
-  input: {
+  select: {
     width: '100%',
-    padding: '16px 20px 16px 50px',
+    padding: '16px 20px',
     border: '2px solid #e5e7eb',
     borderRadius: '12px',
     fontSize: '16px',
@@ -89,33 +80,8 @@ const styles = {
     transition: 'all 0.3s ease',
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
     boxSizing: 'border-box',
-    outline: 'none'
-  },
-  inputFocus: {
-    borderColor: '#3b82f6',
-    boxShadow: '0 0 0 4px rgba(59, 130, 246, 0.1)',
-    transform: 'translateY(-1px)'
-  },
-  toggleButton: {
-    position: 'absolute',
-    right: '16px',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    background: 'none',
-    border: 'none',
-    color: '#9ca3af',
-    cursor: 'pointer',
-    padding: '8px',
-    borderRadius: '6px',
-    fontSize: '16px',
-    transition: 'all 0.2s ease',
-    zIndex: '1'
-  },
-  buttonGroup: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-    gap: '16px',
-    marginTop: '30px'
+    outline: 'none',
+    appearance: 'none'
   },
   button: {
     display: 'flex',
@@ -132,19 +98,10 @@ const styles = {
     boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
     textDecoration: 'none',
     position: 'relative',
-    overflow: 'hidden'
-  },
-  primaryButton: {
+    overflow: 'hidden',
     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    color: 'white'
-  },
-  secondaryButton: {
-    background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-    color: 'white'
-  },
-  successButton: {
-    background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-    color: 'white'
+    color: 'white',
+    width: '100%'
   },
   buttonHover: {
     transform: 'translateY(-2px)',
@@ -155,25 +112,9 @@ const styles = {
     cursor: 'not-allowed',
     transform: 'none'
   },
-  statusCard: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '16px 20px',
-    borderRadius: '10px',
-    fontSize: '14px',
-    marginTop: '15px',
-    border: '1px solid'
-  },
-  successCard: {
-    backgroundColor: '#f0fdf4',
-    borderColor: '#bbf7d0',
-    color: '#166534'
-  },
-  infoCard: {
-    backgroundColor: '#eff6ff',
-    borderColor: '#bfdbfe',
-    color: '#1e40af'
+  loadingSpinner: {
+    animation: 'spin 1s linear infinite',
+    fontSize: '18px'
   },
   errorCard: {
     display: 'flex',
@@ -243,65 +184,107 @@ const styles = {
     overflow: 'hidden',
     border: '1px solid #e5e7eb',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
-  },
-  copyButton: {
-    background: 'none',
-    border: 'none',
-    color: 'inherit',
-    cursor: 'pointer',
-    padding: '6px',
-    borderRadius: '4px',
-    transition: 'all 0.2s ease',
-    fontSize: '14px'
-  },
-  loadingSpinner: {
-    animation: 'spin 1s linear infinite',
-    fontSize: '18px'
   }
 };
 
 export default function BetHistoryViewer() {
   const [roundId, setRoundId] = useState('');
-  const [token, setToken] = useState('');
-  const [savedToken, setSavedToken] = useState('');
   const [roundData, setRoundData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showResults, setShowResults] = useState(false);
-  const [showToken, setShowToken] = useState(false);
-  const [tokenUpdateSuccess, setTokenUpdateSuccess] = useState(false);
-  const [focusedInput, setFocusedInput] = useState(null);
+  const [rounds, setRounds] = useState([]);
+  const [token, setToken] = useState('');
+  const [initializing, setInitializing] = useState(true);
 
+  // Initialize by getting token and then round IDs
   useEffect(() => {
-    const storedToken = 'demo_token_placeholder';
-    if (storedToken && storedToken !== 'demo_token_placeholder') {
-      setSavedToken(storedToken);
-      setToken(storedToken);
-    }
+    const initialize = async () => {
+      try {
+        setInitializing(true);
+
+        // Step 1: Get the token from launchUrl API
+        const launchResponse = await fetch('https://clgaming-be.pixentech.com/external/operatorGame/launchUrl', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            gameId: "6889b9296c7cb0201b67b48b",
+            userId: "shivam",
+            token: "abcd",
+            currency: "INR",
+            gameMode: "R3"
+          })
+        });
+
+        if (!launchResponse.ok) {
+          throw new Error('Failed to get token');
+        }
+
+        const launchData = await launchResponse.json();
+        const newToken = launchData.token;
+        setToken(newToken);
+
+        // Step 2: Get round IDs with the token
+        const historyResponse = await fetch(
+          'https://clgaming-be.pixentech.com/rgs/api/report/betHistory?type=bh&pageSize=20000000',
+          {
+            headers: {
+              'Authorization': `Bearer ${newToken}`,
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        if (!historyResponse.ok) {
+          throw new Error('Failed to get round history');
+        }
+
+        const historyData = await historyResponse.json();
+        if (historyData.data && historyData.data.length > 0) {
+          const formattedRounds = historyData.data.map(item => ({
+            id: item.roundId,
+            gameName: item.gameName,
+            timestamp: item.endTime,
+            betAmount: item.betAmount,
+            winAmount: item.winAmount,
+            totalFreeSpins: item.totalFreeSpins
+          }));
+          setRounds(formattedRounds);
+
+          // Set the first round as default selection
+          if (formattedRounds.length > 0) {
+            setRoundId(formattedRounds[0].id);
+          }
+        }
+      } catch (err) {
+        console.error('Initialization error:', err);
+        setError(`Initialization failed: ${err.message}`);
+      } finally {
+        setInitializing(false);
+      }
+    };
+
+    initialize();
   }, []);
 
   const fetchRoundData = async () => {
-    if (!roundId.trim()) {
-      setError('Please enter a Round ID');
-      return;
-    }
-
-    if (!token && !savedToken) {
-      setError('Please enter an authorization token');
+    if (!roundId) {
+      setError('Please select a round');
       return;
     }
 
     setLoading(true);
     setError(null);
     setShowResults(false);
-    setTokenUpdateSuccess(false);
 
     try {
       const response = await fetch(
         `https://clgaming-be.pixentech.com/rgs/api/report/betHistory/${roundId}`,
         {
           headers: {
-            'Authorization': `Bearer ${token || savedToken}`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         }
@@ -314,66 +297,34 @@ export default function BetHistoryViewer() {
       const data = await response.json();
 
       if (data.code === 2300) {
-        setError('Your session has expired. Please update your token.');
+        throw new Error('Session expired - please refresh the page');
       } else if (!data || data === null) {
-        setError('Invalid Round ID or no data available for this Round ID');
+        throw new Error('No data available for this round');
       } else {
         setRoundData(data);
         setShowResults(true);
-
-        if (token && token !== savedToken) {
-          setSavedToken(token);
-          setTokenUpdateSuccess(true);
-          setTimeout(() => setTokenUpdateSuccess(false), 3000);
-        }
       }
     } catch (err) {
       console.error('Fetch error:', err);
-      setError(`Failed to fetch data: ${err.message}. Please check your connection and try again.`);
+      setError(`Failed to fetch data: ${err.message}`);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleReset = () => {
-    setRoundId('');
-    setRoundData(null);
-    setError(null);
-    setShowResults(false);
-    setTokenUpdateSuccess(false);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleString();
   };
 
-  const handleUpdateToken = () => {
-    if (token && token !== savedToken) {
-      setSavedToken(token);
-      setTokenUpdateSuccess(true);
-      setTimeout(() => setTokenUpdateSuccess(false), 3000);
-    }
+  const formatCurrency = (amount, currency = 'INR') => {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: currency,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(amount);
   };
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      fetchRoundData();
-    }
-  };
-
-  const copyToClipboard = async (text) => {
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
-    }
-  };
-
-  const formatTokenDisplay = (tokenStr) => {
-    if (!tokenStr) return '';
-    return tokenStr.length > 20 ? `${tokenStr.substring(0, 10)}...${tokenStr.substring(tokenStr.length - 10)}` : tokenStr;
-  };
-
-  const getInputStyle = (inputName) => ({
-    ...styles.input,
-    ...(focusedInput === inputName ? styles.inputFocus : {})
-  });
 
   return (
     <div style={styles.container}>
@@ -385,111 +336,57 @@ export default function BetHistoryViewer() {
           </div>
           <h1 style={styles.title}>Bet History Viewer</h1>
           <p style={styles.subtitle}>
-            Retrieve and analyze your gaming round data with ease
+            View your gaming round details
           </p>
         </div>
 
         {/* Main Input Card */}
         <div style={styles.card}>
-          <div style={styles.formSection}>
-            {/* Round ID Input */}
-            <div style={styles.inputGroup}>
-              <label style={styles.label}>Round ID</label>
-              <div style={{ position: 'relative' }}>
-                <span style={styles.inputIcon}>🔍</span>
-                <input
-                  type="text"
+          {initializing ? (
+            <div style={{ textAlign: 'center', padding: '40px 0' }}>
+              <p>Initializing...</p>
+            </div>
+          ) : (
+            <div style={styles.formSection}>
+              {/* Round ID Selector */}
+              <div style={styles.inputGroup}>
+                  <label style={styles.label}>Select Round ID</label>
+                <select
                   value={roundId}
                   onChange={(e) => setRoundId(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  onFocus={() => setFocusedInput('roundId')}
-                  onBlur={() => setFocusedInput(null)}
-                  placeholder="Enter Round ID (e.g., lSx5QWKsX4uSI4LV4oMjc)"
-                  style={getInputStyle('roundId')}
-                />
-              </div>
-            </div>
-
-            {/* Token Input */}
-            <div style={styles.inputGroup}>
-              <label style={styles.label}>Authorization Token</label>
-              <div style={{ position: 'relative' }}>
-                <span style={styles.inputIcon}>🔑</span>
-                <input
-                  type={showToken ? "text" : "password"}
-                  value={token}
-                  onChange={(e) => setToken(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  onFocus={() => setFocusedInput('token')}
-                  onBlur={() => setFocusedInput(null)}
-                  placeholder="Enter your Bearer token"
-                  style={getInputStyle('token')}
-                />
-                <button
-                  style={styles.toggleButton}
-                  onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = '#f3f4f6';
-                    e.target.style.color = '#374151';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = 'transparent';
-                    e.target.style.color = '#9ca3af';
-                  }}
-                  onClick={() => setShowToken(!showToken)}
+                  style={styles.select}
+                  disabled={loading || rounds.length === 0}
                 >
-                  {showToken ? '👁️' : '🙈'}
-                </button>
+                  {rounds.length === 0 ? (
+                    <option value="">No rounds available</option>
+                  ) : (
+                    rounds.map((round, index) => (
+                      <option key={index} value={round.id}>
+                        {round.gameName} - {formatDate(round.timestamp)} -
+                        Bet: {formatCurrency(round.betAmount)} -
+                        Win: {formatCurrency(round.winAmount)} - Spin: {round.totalFreeSpins ?? 0}
+                      </option>
+                    ))
+                  )}
+                </select>
               </div>
 
-              {savedToken && (
-                <div style={{ ...styles.statusCard, ...styles.successCard }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span>✅</span>
-                    <span>Saved token: {formatTokenDisplay(savedToken)}</span>
-                  </div>
-                  <button
-                    onClick={() => copyToClipboard(savedToken)}
-                    style={styles.copyButton}
-                    onMouseEnter={(e) => {
-                      e.target.style.backgroundColor = 'rgba(0,0,0,0.05)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.backgroundColor = 'transparent';
-                    }}
-                  >
-                    📋
-                  </button>
-                </div>
-              )}
-
-              {tokenUpdateSuccess && (
-                <div style={{ ...styles.statusCard, ...styles.infoCard }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span>✅</span>
-                    <span>Token updated successfully!</span>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Action Buttons */}
-            <div style={styles.buttonGroup}>
+              {/* View Details Button */}
               <button
                 onClick={fetchRoundData}
-                disabled={loading}
+                disabled={loading || rounds.length === 0}
                 style={{
                   ...styles.button,
-                  ...styles.primaryButton,
-                  ...(loading ? styles.disabledButton : {})
+                  ...(loading || rounds.length === 0 ? styles.disabledButton : {})
                 }}
                 onMouseEnter={(e) => {
-                  if (!loading) {
+                  if (!loading && rounds.length > 0) {
                     e.target.style.transform = 'translateY(-2px)';
                     e.target.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.2)';
                   }
                 }}
                 onMouseLeave={(e) => {
-                  if (!loading) {
+                  if (!loading && rounds.length > 0) {
                     e.target.style.transform = 'translateY(0)';
                     e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
                   }
@@ -503,46 +400,12 @@ export default function BetHistoryViewer() {
                 ) : (
                   <>
                     <span>🔍</span>
-                    <span>Fetch Round Data</span>
+                    <span>View Round Details</span>
                   </>
                 )}
               </button>
-
-              <button
-                onClick={handleReset}
-                style={{ ...styles.button, ...styles.secondaryButton }}
-                onMouseEnter={(e) => {
-                  e.target.style.transform = 'translateY(-2px)';
-                  e.target.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.2)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.transform = 'translateY(0)';
-                  e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
-                }}
-              >
-                <span>🔄</span>
-                <span>Reset</span>
-              </button>
-
-              {token && token !== savedToken && (
-                <button
-                  onClick={handleUpdateToken}
-                  style={{ ...styles.button, ...styles.successButton }}
-                  onMouseEnter={(e) => {
-                    e.target.style.transform = 'translateY(-2px)';
-                    e.target.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.2)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.transform = 'translateY(0)';
-                    e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
-                  }}
-                >
-                  <span>🔑</span>
-                  <span>Update Token</span>
-                </button>
-              )}
             </div>
-          </div>
+          )}
 
           {/* Error Display */}
           {error && (
@@ -594,9 +457,6 @@ export default function BetHistoryViewer() {
           }
           .${styles.gameInfo} {
             text-align: left !important;
-          }
-          .${styles.buttonGroup} {
-            grid-template-columns: 1fr !important;
           }
         }
       `}</style>
