@@ -1,4551 +1,605 @@
+"use client";
+
+import { useState, useEffect } from 'react';
 import SlotResultDisplay from "./SlotResultDisplayv6";
 
-const roundData = {
-  "_id": "6894517e62af9dd3ca5a73ca",
-  "roundId": "P91WtgMVzsIm7vHyiR23x",
-  "betTxnId": "ed11c0db-d3e0-4753-ab1e-96a668bd69d0",
-  "playerSessionId": "689451232e52df15f2c393a0",
-  "balance": 978938,
-  "externalPlayerId": "shivam",
-  "user": "68924132f782aff392cefd1e",
-  "status": "credit_completed",
-  "isFreeBet": true,
-  "isCompleted": false,
-  "gameAlias": "candybonanza1000",
-  "operatorGame": "6889b9296c7cb0201b67b48b",
-  "gameMode": "R3",
-  "platformTransactionId": "P91WtgMVzsIm7vHyiR23x",
-  "buyBonus": true,
-  "betType": "bb",
-  "endTime": "2025-08-07T07:11:47.045Z",
-  "feature": "FG1",
-  "gameName": "Candy Bonanza 1000",
-  "createdAt": "2025-08-07T07:10:54.683Z",
-  "updatedAt": "2025-08-07T07:11:47.067Z",
-  "winAmount": 848,
-  "totalFreeSpins": 10,
-  "betAmount": 2000,
-  "currencyCode": "INR",
-  "extraData": [
-    {
-      "cascadeData": [
-        {
-          "reelView": [
-            [
-              "SC",
-              "L2",
-              "H1",
-              "L3",
-              "L3"
-            ],
-            [
-              "L1",
-              "L2",
-              "L2",
-              "H4",
-              "H2"
-            ],
-            [
-              "H1",
-              "L3",
-              "H2",
-              "SC",
-              "H1"
-            ],
-            [
-              "H3",
-              "H2",
-              "SC",
-              "L5",
-              "H3"
-            ],
-            [
-              "L4",
-              "L4",
-              "L4",
-              "L5",
-              "L1"
-            ],
-            [
-              "L5",
-              "H3",
-              "H1",
-              "H2",
-              "SC"
-            ]
-          ],
-          "scatterCount": 4,
-          "blustSymbols": [],
-          "scatterPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "multiplier": [],
-          "spinWin": 0
-        }
-      ],
-      "highestExposure": 0,
-      "bet": "20",
-      "totalWin": 0,
-      "baseWin": 0,
-      "nextFeature": "freespins",
-      "pendingFeature": 10,
-      "featureResults": [
-        {
-          "featureType": "freespins",
-          "featureTriggerPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "spinResults": [],
-          "totalWin": 0,
-          "currentCount": 0,
-          "currentWin": 0,
-          "retrigger": false,
-          "retriggerCount": 0,
-          "totalCount": 10,
-          "closed": false,
-          "multiplier": null
-        }
-      ],
-      "active": true,
-      "multiplier": 1,
-      "winning_places": []
-    },
-    {
-      "cascadeData": [
-        {
-          "reelView": [
-            [
-              "SC",
-              "L2",
-              "H1",
-              "L3",
-              "L3"
-            ],
-            [
-              "L1",
-              "L2",
-              "L2",
-              "H4",
-              "H2"
-            ],
-            [
-              "H1",
-              "L3",
-              "H2",
-              "SC",
-              "H1"
-            ],
-            [
-              "H3",
-              "H2",
-              "SC",
-              "L5",
-              "H3"
-            ],
-            [
-              "L4",
-              "L4",
-              "L4",
-              "L5",
-              "L1"
-            ],
-            [
-              "L5",
-              "H3",
-              "H1",
-              "H2",
-              "SC"
-            ]
-          ],
-          "scatterCount": 4,
-          "blustSymbols": [],
-          "scatterPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "multiplier": [],
-          "spinWin": 0
-        }
-      ],
-      "highestExposure": 0,
-      "bet": "20",
-      "totalWin": 0,
-      "baseWin": 0,
-      "nextFeature": "freespins",
-      "pendingFeature": 9,
-      "featureResults": [
-        {
-          "featureType": "freespins",
-          "featureTriggerPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "spinResults": [
-            {
-              "cascadeData": [
-                {
-                  "reelView": [
-                    [
-                      "H2",
-                      "H2",
-                      "L3",
-                      "L3",
-                      "L2"
-                    ],
-                    [
-                      "H3",
-                      "H2",
-                      "H2",
-                      "L6",
-                      "L3"
-                    ],
-                    [
-                      "H4",
-                      "H3",
-                      "H3",
-                      "L5",
-                      "L5"
-                    ],
-                    [
-                      "L4",
-                      "H4",
-                      "H4",
-                      "L4",
-                      "L5"
-                    ],
-                    [
-                      "L3",
-                      "L3",
-                      "L2",
-                      "L2",
-                      "L2"
-                    ],
-                    [
-                      "L1",
-                      "L1",
-                      "H1",
-                      "H1",
-                      "H1"
-                    ]
-                  ],
-                  "scatterCount": 0,
-                  "blustSymbols": [],
-                  "scatterPositions": [],
-                  "multiplier": [
-                    {
-                      "position": [
-                        1,
-                        3
-                      ],
-                      "multiplier": 2
-                    }
-                  ],
-                  "spinWin": 0
-                }
-              ],
-              "totalWin": 0,
-              "currentCount": 1,
-              "multipliers": [
-                {
-                  "position": [
-                    1,
-                    3
-                  ],
-                  "multiplier": 2
-                }
-              ],
-              "totalMultiplier": 2,
-              "highestExposure": 0
-            }
-          ],
-          "totalWin": 0,
-          "currentCount": 1,
-          "currentWin": 0,
-          "retrigger": false,
-          "retriggerCount": 0,
-          "totalCount": 10,
-          "closed": false,
-          "multiplier": null
-        }
-      ],
-      "active": true,
-      "multiplier": 1,
-      "winning_places": [],
-      "symbols": [
-        {
-          "reelView": [
-            [
-              "H2",
-              "H2",
-              "L3",
-              "L3",
-              "L2"
-            ],
-            [
-              "H3",
-              "H2",
-              "H2",
-              "L6",
-              "L3"
-            ],
-            [
-              "H4",
-              "H3",
-              "H3",
-              "L5",
-              "L5"
-            ],
-            [
-              "L4",
-              "H4",
-              "H4",
-              "L4",
-              "L5"
-            ],
-            [
-              "L3",
-              "L3",
-              "L2",
-              "L2",
-              "L2"
-            ],
-            [
-              "L1",
-              "L1",
-              "H1",
-              "H1",
-              "H1"
-            ]
-          ],
-          "scatterCount": 0,
-          "blustSymbols": [],
-          "scatterPositions": [],
-          "multiplier": [
-            {
-              "position": [
-                1,
-                3
-              ],
-              "multiplier": 2
-            }
-          ],
-          "spinWin": 0
-        }
-      ]
-    },
-    {
-      "cascadeData": [
-        {
-          "reelView": [
-            [
-              "SC",
-              "L2",
-              "H1",
-              "L3",
-              "L3"
-            ],
-            [
-              "L1",
-              "L2",
-              "L2",
-              "H4",
-              "H2"
-            ],
-            [
-              "H1",
-              "L3",
-              "H2",
-              "SC",
-              "H1"
-            ],
-            [
-              "H3",
-              "H2",
-              "SC",
-              "L5",
-              "H3"
-            ],
-            [
-              "L4",
-              "L4",
-              "L4",
-              "L5",
-              "L1"
-            ],
-            [
-              "L5",
-              "H3",
-              "H1",
-              "H2",
-              "SC"
-            ]
-          ],
-          "scatterCount": 4,
-          "blustSymbols": [],
-          "scatterPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "multiplier": [],
-          "spinWin": 0
-        }
-      ],
-      "highestExposure": 0,
-      "bet": "20",
-      "totalWin": 180,
-      "baseWin": 0,
-      "nextFeature": "freespins",
-      "pendingFeature": 8,
-      "featureResults": [
-        {
-          "featureType": "freespins",
-          "featureTriggerPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "spinResults": [
-            {
-              "cascadeData": [
-                {
-                  "reelView": [
-                    [
-                      "L5",
-                      "L5",
-                      "L1",
-                      "L1",
-                      "H1"
-                    ],
-                    [
-                      "H3",
-                      "H3",
-                      "L1",
-                      "L1",
-                      "H4"
-                    ],
-                    [
-                      "L3",
-                      "L6",
-                      "L1",
-                      "L1",
-                      "H3"
-                    ],
-                    [
-                      "L5",
-                      "L3",
-                      "L3",
-                      "H2",
-                      "H2"
-                    ],
-                    [
-                      "H4",
-                      "H4",
-                      "H3",
-                      "H3",
-                      "H3"
-                    ],
-                    [
-                      "H3",
-                      "H3",
-                      "L1",
-                      "L1",
-                      "L5"
-                    ]
-                  ],
-                  "scatterCount": 0,
-                  "blustSymbols": [
-                    {
-                      "symbol": "L1",
-                      "positions": [
-                        [
-                          0,
-                          2
-                        ],
-                        [
-                          0,
-                          3
-                        ],
-                        [
-                          1,
-                          2
-                        ],
-                        [
-                          1,
-                          3
-                        ],
-                        [
-                          2,
-                          2
-                        ],
-                        [
-                          2,
-                          3
-                        ],
-                        [
-                          5,
-                          2
-                        ],
-                        [
-                          5,
-                          3
-                        ]
-                      ],
-                      "winAmount": 20
-                    },
-                    {
-                      "symbol": "H3",
-                      "positions": [
-                        [
-                          1,
-                          0
-                        ],
-                        [
-                          1,
-                          1
-                        ],
-                        [
-                          2,
-                          4
-                        ],
-                        [
-                          4,
-                          2
-                        ],
-                        [
-                          4,
-                          3
-                        ],
-                        [
-                          4,
-                          4
-                        ],
-                        [
-                          5,
-                          0
-                        ],
-                        [
-                          5,
-                          1
-                        ]
-                      ],
-                      "winAmount": 40
-                    }
-                  ],
-                  "scatterPositions": [],
-                  "multiplier": [
-                    {
-                      "position": [
-                        2,
-                        1
-                      ],
-                      "multiplier": 3
-                    }
-                  ],
-                  "spinWin": 60
-                },
-                {
-                  "reelView": [
-                    [
-                      "H3",
-                      "H3",
-                      "L5",
-                      "L5",
-                      "H1"
-                    ],
-                    [
-                      "L5",
-                      "L5",
-                      "H3",
-                      "H3",
-                      "H4"
-                    ],
-                    [
-                      "L2",
-                      "H3",
-                      "H3",
-                      "L3",
-                      "L6"
-                    ],
-                    [
-                      "L5",
-                      "L3",
-                      "L3",
-                      "H2",
-                      "H2"
-                    ],
-                    [
-                      "L1",
-                      "H2",
-                      "H2",
-                      "H4",
-                      "H4"
-                    ],
-                    [
-                      "L1",
-                      "L1",
-                      "H2",
-                      "H2",
-                      "L5"
-                    ]
-                  ],
-                  "scatterCount": 0,
-                  "blustSymbols": [],
-                  "scatterPositions": [],
-                  "multiplier": [
-                    {
-                      "position": [
-                        2,
-                        4
-                      ],
-                      "multiplier": 3
-                    }
-                  ],
-                  "spinWin": 0
-                }
-              ],
-              "totalWin": 180,
-              "currentCount": 2,
-              "multipliers": [
-                {
-                  "position": [
-                    2,
-                    4
-                  ],
-                  "multiplier": 3
-                }
-              ],
-              "totalMultiplier": 3,
-              "highestExposure": 9
-            }
-          ],
-          "totalWin": 180,
-          "currentCount": 2,
-          "currentWin": 180,
-          "retrigger": false,
-          "retriggerCount": 0,
-          "totalCount": 10,
-          "closed": false,
-          "multiplier": null
-        }
-      ],
-      "active": true,
-      "multiplier": 1,
-      "winning_places": [],
-      "symbols": [
-        {
-          "reelView": [
-            [
-              "L5",
-              "L5",
-              "L1",
-              "L1",
-              "H1"
-            ],
-            [
-              "H3",
-              "H3",
-              "L1",
-              "L1",
-              "H4"
-            ],
-            [
-              "L3",
-              "L6",
-              "L1",
-              "L1",
-              "H3"
-            ],
-            [
-              "L5",
-              "L3",
-              "L3",
-              "H2",
-              "H2"
-            ],
-            [
-              "H4",
-              "H4",
-              "H3",
-              "H3",
-              "H3"
-            ],
-            [
-              "H3",
-              "H3",
-              "L1",
-              "L1",
-              "L5"
-            ]
-          ],
-          "scatterCount": 0,
-          "blustSymbols": [
-            {
-              "symbol": "L1",
-              "positions": [
-                [
-                  0,
-                  2
-                ],
-                [
-                  0,
-                  3
-                ],
-                [
-                  1,
-                  2
-                ],
-                [
-                  1,
-                  3
-                ],
-                [
-                  2,
-                  2
-                ],
-                [
-                  2,
-                  3
-                ],
-                [
-                  5,
-                  2
-                ],
-                [
-                  5,
-                  3
-                ]
-              ],
-              "winAmount": 20
-            },
-            {
-              "symbol": "H3",
-              "positions": [
-                [
-                  1,
-                  0
-                ],
-                [
-                  1,
-                  1
-                ],
-                [
-                  2,
-                  4
-                ],
-                [
-                  4,
-                  2
-                ],
-                [
-                  4,
-                  3
-                ],
-                [
-                  4,
-                  4
-                ],
-                [
-                  5,
-                  0
-                ],
-                [
-                  5,
-                  1
-                ]
-              ],
-              "winAmount": 40
-            }
-          ],
-          "scatterPositions": [],
-          "multiplier": [
-            {
-              "position": [
-                2,
-                1
-              ],
-              "multiplier": 3
-            }
-          ],
-          "spinWin": 60
-        },
-        {
-          "reelView": [
-            [
-              "H3",
-              "H3",
-              "L5",
-              "L5",
-              "H1"
-            ],
-            [
-              "L5",
-              "L5",
-              "H3",
-              "H3",
-              "H4"
-            ],
-            [
-              "L2",
-              "H3",
-              "H3",
-              "L3",
-              "L6"
-            ],
-            [
-              "L5",
-              "L3",
-              "L3",
-              "H2",
-              "H2"
-            ],
-            [
-              "L1",
-              "H2",
-              "H2",
-              "H4",
-              "H4"
-            ],
-            [
-              "L1",
-              "L1",
-              "H2",
-              "H2",
-              "L5"
-            ]
-          ],
-          "scatterCount": 0,
-          "blustSymbols": [],
-          "scatterPositions": [],
-          "multiplier": [
-            {
-              "position": [
-                2,
-                4
-              ],
-              "multiplier": 3
-            }
-          ],
-          "spinWin": 0
-        }
-      ]
-    },
-    {
-      "cascadeData": [
-        {
-          "reelView": [
-            [
-              "SC",
-              "L2",
-              "H1",
-              "L3",
-              "L3"
-            ],
-            [
-              "L1",
-              "L2",
-              "L2",
-              "H4",
-              "H2"
-            ],
-            [
-              "H1",
-              "L3",
-              "H2",
-              "SC",
-              "H1"
-            ],
-            [
-              "H3",
-              "H2",
-              "SC",
-              "L5",
-              "H3"
-            ],
-            [
-              "L4",
-              "L4",
-              "L4",
-              "L5",
-              "L1"
-            ],
-            [
-              "L5",
-              "H3",
-              "H1",
-              "H2",
-              "SC"
-            ]
-          ],
-          "scatterCount": 4,
-          "blustSymbols": [],
-          "scatterPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "multiplier": [],
-          "spinWin": 0
-        }
-      ],
-      "highestExposure": 0,
-      "bet": "20",
-      "totalWin": 200,
-      "baseWin": 0,
-      "nextFeature": "freespins",
-      "pendingFeature": 7,
-      "featureResults": [
-        {
-          "featureType": "freespins",
-          "featureTriggerPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "spinResults": [
-            {
-              "cascadeData": [
-                {
-                  "reelView": [
-                    [
-                      "L2",
-                      "L2",
-                      "L3",
-                      "L3",
-                      "L5"
-                    ],
-                    [
-                      "H4",
-                      "L2",
-                      "L2",
-                      "L5",
-                      "H3"
-                    ],
-                    [
-                      "L4",
-                      "L4",
-                      "H3",
-                      "H3",
-                      "H4"
-                    ],
-                    [
-                      "L5",
-                      "L5",
-                      "L3",
-                      "L3",
-                      "H2"
-                    ],
-                    [
-                      "L5",
-                      "L3",
-                      "L3",
-                      "L1",
-                      "L1"
-                    ],
-                    [
-                      "L2",
-                      "L6",
-                      "L5",
-                      "L5",
-                      "L5"
-                    ]
-                  ],
-                  "scatterCount": 0,
-                  "blustSymbols": [
-                    {
-                      "symbol": "L5",
-                      "positions": [
-                        [
-                          0,
-                          4
-                        ],
-                        [
-                          1,
-                          3
-                        ],
-                        [
-                          3,
-                          0
-                        ],
-                        [
-                          3,
-                          1
-                        ],
-                        [
-                          4,
-                          0
-                        ],
-                        [
-                          5,
-                          2
-                        ],
-                        [
-                          5,
-                          3
-                        ],
-                        [
-                          5,
-                          4
-                        ]
-                      ],
-                      "winAmount": 5
-                    }
-                  ],
-                  "scatterPositions": [],
-                  "multiplier": [
-                    {
-                      "position": [
-                        5,
-                        1
-                      ],
-                      "multiplier": 4
-                    }
-                  ],
-                  "spinWin": 5
-                },
-                {
-                  "reelView": [
-                    [
-                      "L2",
-                      "L2",
-                      "L2",
-                      "L3",
-                      "L3"
-                    ],
-                    [
-                      "L5",
-                      "H4",
-                      "L2",
-                      "L2",
-                      "H3"
-                    ],
-                    [
-                      "L4",
-                      "L4",
-                      "H3",
-                      "H3",
-                      "H4"
-                    ],
-                    [
-                      "H1",
-                      "H1",
-                      "L3",
-                      "L3",
-                      "H2"
-                    ],
-                    [
-                      "H2",
-                      "L3",
-                      "L3",
-                      "L1",
-                      "L1"
-                    ],
-                    [
-                      "H2",
-                      "L4",
-                      "L4",
-                      "L2",
-                      "L6"
-                    ]
-                  ],
-                  "scatterCount": 0,
-                  "blustSymbols": [],
-                  "scatterPositions": [],
-                  "multiplier": [
-                    {
-                      "position": [
-                        5,
-                        4
-                      ],
-                      "multiplier": 4
-                    }
-                  ],
-                  "spinWin": 0
-                }
-              ],
-              "totalWin": 20,
-              "currentCount": 3,
-              "multipliers": [
-                {
-                  "position": [
-                    5,
-                    4
-                  ],
-                  "multiplier": 4
-                }
-              ],
-              "totalMultiplier": 4,
-              "highestExposure": 1
-            }
-          ],
-          "totalWin": 200,
-          "currentCount": 3,
-          "currentWin": 20,
-          "retrigger": false,
-          "retriggerCount": 0,
-          "totalCount": 10,
-          "closed": false,
-          "multiplier": null
-        }
-      ],
-      "active": true,
-      "multiplier": 1,
-      "winning_places": [],
-      "symbols": [
-        {
-          "reelView": [
-            [
-              "L2",
-              "L2",
-              "L3",
-              "L3",
-              "L5"
-            ],
-            [
-              "H4",
-              "L2",
-              "L2",
-              "L5",
-              "H3"
-            ],
-            [
-              "L4",
-              "L4",
-              "H3",
-              "H3",
-              "H4"
-            ],
-            [
-              "L5",
-              "L5",
-              "L3",
-              "L3",
-              "H2"
-            ],
-            [
-              "L5",
-              "L3",
-              "L3",
-              "L1",
-              "L1"
-            ],
-            [
-              "L2",
-              "L6",
-              "L5",
-              "L5",
-              "L5"
-            ]
-          ],
-          "scatterCount": 0,
-          "blustSymbols": [
-            {
-              "symbol": "L5",
-              "positions": [
-                [
-                  0,
-                  4
-                ],
-                [
-                  1,
-                  3
-                ],
-                [
-                  3,
-                  0
-                ],
-                [
-                  3,
-                  1
-                ],
-                [
-                  4,
-                  0
-                ],
-                [
-                  5,
-                  2
-                ],
-                [
-                  5,
-                  3
-                ],
-                [
-                  5,
-                  4
-                ]
-              ],
-              "winAmount": 5
-            }
-          ],
-          "scatterPositions": [],
-          "multiplier": [
-            {
-              "position": [
-                5,
-                1
-              ],
-              "multiplier": 4
-            }
-          ],
-          "spinWin": 5
-        },
-        {
-          "reelView": [
-            [
-              "L2",
-              "L2",
-              "L2",
-              "L3",
-              "L3"
-            ],
-            [
-              "L5",
-              "H4",
-              "L2",
-              "L2",
-              "H3"
-            ],
-            [
-              "L4",
-              "L4",
-              "H3",
-              "H3",
-              "H4"
-            ],
-            [
-              "H1",
-              "H1",
-              "L3",
-              "L3",
-              "H2"
-            ],
-            [
-              "H2",
-              "L3",
-              "L3",
-              "L1",
-              "L1"
-            ],
-            [
-              "H2",
-              "L4",
-              "L4",
-              "L2",
-              "L6"
-            ]
-          ],
-          "scatterCount": 0,
-          "blustSymbols": [],
-          "scatterPositions": [],
-          "multiplier": [
-            {
-              "position": [
-                5,
-                4
-              ],
-              "multiplier": 4
-            }
-          ],
-          "spinWin": 0
-        }
-      ]
-    },
-    {
-      "cascadeData": [
-        {
-          "reelView": [
-            [
-              "SC",
-              "L2",
-              "H1",
-              "L3",
-              "L3"
-            ],
-            [
-              "L1",
-              "L2",
-              "L2",
-              "H4",
-              "H2"
-            ],
-            [
-              "H1",
-              "L3",
-              "H2",
-              "SC",
-              "H1"
-            ],
-            [
-              "H3",
-              "H2",
-              "SC",
-              "L5",
-              "H3"
-            ],
-            [
-              "L4",
-              "L4",
-              "L4",
-              "L5",
-              "L1"
-            ],
-            [
-              "L5",
-              "H3",
-              "H1",
-              "H2",
-              "SC"
-            ]
-          ],
-          "scatterCount": 4,
-          "blustSymbols": [],
-          "scatterPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "multiplier": [],
-          "spinWin": 0
-        }
-      ],
-      "highestExposure": 0,
-      "bet": "20",
-      "totalWin": 753,
-      "baseWin": 0,
-      "nextFeature": "freespins",
-      "pendingFeature": 6,
-      "featureResults": [
-        {
-          "featureType": "freespins",
-          "featureTriggerPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "spinResults": [
-            {
-              "cascadeData": [
-                {
-                  "reelView": [
-                    [
-                      "L2",
-                      "L3",
-                      "L3",
-                      "L5",
-                      "L5"
-                    ],
-                    [
-                      "L4",
-                      "L2",
-                      "L2",
-                      "L1",
-                      "L1"
-                    ],
-                    [
-                      "H2",
-                      "L2",
-                      "L2",
-                      "L5",
-                      "L5"
-                    ],
-                    [
-                      "L4",
-                      "L4",
-                      "L2",
-                      "L2",
-                      "H3"
-                    ],
-                    [
-                      "L4",
-                      "L4",
-                      "L2",
-                      "L2",
-                      "L6"
-                    ],
-                    [
-                      "L4",
-                      "L4",
-                      "L4",
-                      "L5",
-                      "L5"
-                    ]
-                  ],
-                  "scatterCount": 0,
-                  "blustSymbols": [
-                    {
-                      "symbol": "L2",
-                      "positions": [
-                        [
-                          0,
-                          0
-                        ],
-                        [
-                          1,
-                          1
-                        ],
-                        [
-                          1,
-                          2
-                        ],
-                        [
-                          2,
-                          1
-                        ],
-                        [
-                          2,
-                          2
-                        ],
-                        [
-                          3,
-                          2
-                        ],
-                        [
-                          3,
-                          3
-                        ],
-                        [
-                          4,
-                          2
-                        ],
-                        [
-                          4,
-                          3
-                        ]
-                      ],
-                      "winAmount": 16
-                    },
-                    {
-                      "symbol": "L4",
-                      "positions": [
-                        [
-                          1,
-                          0
-                        ],
-                        [
-                          3,
-                          0
-                        ],
-                        [
-                          3,
-                          1
-                        ],
-                        [
-                          4,
-                          0
-                        ],
-                        [
-                          4,
-                          1
-                        ],
-                        [
-                          5,
-                          0
-                        ],
-                        [
-                          5,
-                          1
-                        ],
-                        [
-                          5,
-                          2
-                        ]
-                      ],
-                      "winAmount": 8
-                    }
-                  ],
-                  "scatterPositions": [],
-                  "multiplier": [
-                    {
-                      "position": [
-                        4,
-                        4
-                      ],
-                      "multiplier": 2
-                    }
-                  ],
-                  "spinWin": 24
-                },
-                {
-                  "reelView": [
-                    [
-                      "H3",
-                      "L3",
-                      "L3",
-                      "L5",
-                      "L5"
-                    ],
-                    [
-                      "L4",
-                      "H1",
-                      "H1",
-                      "L1",
-                      "L1"
-                    ],
-                    [
-                      "L5",
-                      "L5",
-                      "H2",
-                      "L5",
-                      "L5"
-                    ],
-                    [
-                      "L3",
-                      "L3",
-                      "L4",
-                      "L4",
-                      "H3"
-                    ],
-                    [
-                      "L4",
-                      "L3",
-                      "L3",
-                      "L5",
-                      "L6"
-                    ],
-                    [
-                      "L5",
-                      "H3",
-                      "H3",
-                      "L5",
-                      "L5"
-                    ]
-                  ],
-                  "scatterCount": 0,
-                  "blustSymbols": [
-                    {
-                      "symbol": "L5",
-                      "positions": [
-                        [
-                          0,
-                          3
-                        ],
-                        [
-                          0,
-                          4
-                        ],
-                        [
-                          2,
-                          0
-                        ],
-                        [
-                          2,
-                          1
-                        ],
-                        [
-                          2,
-                          3
-                        ],
-                        [
-                          2,
-                          4
-                        ],
-                        [
-                          4,
-                          3
-                        ],
-                        [
-                          5,
-                          0
-                        ],
-                        [
-                          5,
-                          3
-                        ],
-                        [
-                          5,
-                          4
-                        ]
-                      ],
-                      "winAmount": 15
-                    }
-                  ],
-                  "scatterPositions": [],
-                  "multiplier": [
-                    {
-                      "position": [
-                        4,
-                        4
-                      ],
-                      "multiplier": 2
-                    }
-                  ],
-                  "spinWin": 15
-                },
-                {
-                  "reelView": [
-                    [
-                      "H3",
-                      "H3",
-                      "H3",
-                      "L3",
-                      "L3"
-                    ],
-                    [
-                      "L4",
-                      "H1",
-                      "H1",
-                      "L1",
-                      "L1"
-                    ],
-                    [
-                      "H3",
-                      "H3",
-                      "L5",
-                      "L5",
-                      "H2"
-                    ],
-                    [
-                      "L3",
-                      "L3",
-                      "L4",
-                      "L4",
-                      "H3"
-                    ],
-                    [
-                      "L2",
-                      "L4",
-                      "L3",
-                      "L3",
-                      "L6"
-                    ],
-                    [
-                      "H1",
-                      "H1",
-                      "L6",
-                      "H3",
-                      "H3"
-                    ]
-                  ],
-                  "scatterCount": 0,
-                  "blustSymbols": [
-                    {
-                      "symbol": "H3",
-                      "positions": [
-                        [
-                          0,
-                          0
-                        ],
-                        [
-                          0,
-                          1
-                        ],
-                        [
-                          0,
-                          2
-                        ],
-                        [
-                          2,
-                          0
-                        ],
-                        [
-                          2,
-                          1
-                        ],
-                        [
-                          3,
-                          4
-                        ],
-                        [
-                          5,
-                          3
-                        ],
-                        [
-                          5,
-                          4
-                        ]
-                      ],
-                      "winAmount": 40
-                    }
-                  ],
-                  "scatterPositions": [],
-                  "multiplier": [
-                    {
-                      "position": [
-                        4,
-                        4
-                      ],
-                      "multiplier": 2
-                    },
-                    {
-                      "position": [
-                        5,
-                        2
-                      ],
-                      "multiplier": 2
-                    }
-                  ],
-                  "spinWin": 40
-                },
-                {
-                  "reelView": [
-                    [
-                      "L1",
-                      "H4",
-                      "H4",
-                      "L3",
-                      "L3"
-                    ],
-                    [
-                      "L4",
-                      "H1",
-                      "H1",
-                      "L1",
-                      "L1"
-                    ],
-                    [
-                      "H1",
-                      "H1",
-                      "L5",
-                      "L5",
-                      "H2"
-                    ],
-                    [
-                      "L4",
-                      "L3",
-                      "L3",
-                      "L4",
-                      "L4"
-                    ],
-                    [
-                      "L2",
-                      "L4",
-                      "L3",
-                      "L3",
-                      "L6"
-                    ],
-                    [
-                      "L4",
-                      "L6",
-                      "H1",
-                      "H1",
-                      "L6"
-                    ]
-                  ],
-                  "scatterCount": 0,
-                  "blustSymbols": [],
-                  "scatterPositions": [],
-                  "multiplier": [
-                    {
-                      "position": [
-                        4,
-                        4
-                      ],
-                      "multiplier": 2
-                    },
-                    {
-                      "position": [
-                        5,
-                        1
-                      ],
-                      "multiplier": 3
-                    },
-                    {
-                      "position": [
-                        5,
-                        4
-                      ],
-                      "multiplier": 2
-                    }
-                  ],
-                  "spinWin": 0
-                }
-              ],
-              "totalWin": 553,
-              "currentCount": 4,
-              "multipliers": [
-                {
-                  "position": [
-                    4,
-                    4
-                  ],
-                  "multiplier": 2
-                },
-                {
-                  "position": [
-                    5,
-                    1
-                  ],
-                  "multiplier": 3
-                },
-                {
-                  "position": [
-                    5,
-                    4
-                  ],
-                  "multiplier": 2
-                }
-              ],
-              "totalMultiplier": 7,
-              "highestExposure": 27.65
-            }
-          ],
-          "totalWin": 753,
-          "currentCount": 4,
-          "currentWin": 553,
-          "retrigger": false,
-          "retriggerCount": 0,
-          "totalCount": 10,
-          "closed": false,
-          "multiplier": null
-        }
-      ],
-      "active": true,
-      "multiplier": 1,
-      "winning_places": [],
-      "symbols": [
-        {
-          "reelView": [
-            [
-              "L2",
-              "L3",
-              "L3",
-              "L5",
-              "L5"
-            ],
-            [
-              "L4",
-              "L2",
-              "L2",
-              "L1",
-              "L1"
-            ],
-            [
-              "H2",
-              "L2",
-              "L2",
-              "L5",
-              "L5"
-            ],
-            [
-              "L4",
-              "L4",
-              "L2",
-              "L2",
-              "H3"
-            ],
-            [
-              "L4",
-              "L4",
-              "L2",
-              "L2",
-              "L6"
-            ],
-            [
-              "L4",
-              "L4",
-              "L4",
-              "L5",
-              "L5"
-            ]
-          ],
-          "scatterCount": 0,
-          "blustSymbols": [
-            {
-              "symbol": "L2",
-              "positions": [
-                [
-                  0,
-                  0
-                ],
-                [
-                  1,
-                  1
-                ],
-                [
-                  1,
-                  2
-                ],
-                [
-                  2,
-                  1
-                ],
-                [
-                  2,
-                  2
-                ],
-                [
-                  3,
-                  2
-                ],
-                [
-                  3,
-                  3
-                ],
-                [
-                  4,
-                  2
-                ],
-                [
-                  4,
-                  3
-                ]
-              ],
-              "winAmount": 16
-            },
-            {
-              "symbol": "L4",
-              "positions": [
-                [
-                  1,
-                  0
-                ],
-                [
-                  3,
-                  0
-                ],
-                [
-                  3,
-                  1
-                ],
-                [
-                  4,
-                  0
-                ],
-                [
-                  4,
-                  1
-                ],
-                [
-                  5,
-                  0
-                ],
-                [
-                  5,
-                  1
-                ],
-                [
-                  5,
-                  2
-                ]
-              ],
-              "winAmount": 8
-            }
-          ],
-          "scatterPositions": [],
-          "multiplier": [
-            {
-              "position": [
-                4,
-                4
-              ],
-              "multiplier": 2
-            }
-          ],
-          "spinWin": 24
-        },
-        {
-          "reelView": [
-            [
-              "H3",
-              "L3",
-              "L3",
-              "L5",
-              "L5"
-            ],
-            [
-              "L4",
-              "H1",
-              "H1",
-              "L1",
-              "L1"
-            ],
-            [
-              "L5",
-              "L5",
-              "H2",
-              "L5",
-              "L5"
-            ],
-            [
-              "L3",
-              "L3",
-              "L4",
-              "L4",
-              "H3"
-            ],
-            [
-              "L4",
-              "L3",
-              "L3",
-              "L5",
-              "L6"
-            ],
-            [
-              "L5",
-              "H3",
-              "H3",
-              "L5",
-              "L5"
-            ]
-          ],
-          "scatterCount": 0,
-          "blustSymbols": [
-            {
-              "symbol": "L5",
-              "positions": [
-                [
-                  0,
-                  3
-                ],
-                [
-                  0,
-                  4
-                ],
-                [
-                  2,
-                  0
-                ],
-                [
-                  2,
-                  1
-                ],
-                [
-                  2,
-                  3
-                ],
-                [
-                  2,
-                  4
-                ],
-                [
-                  4,
-                  3
-                ],
-                [
-                  5,
-                  0
-                ],
-                [
-                  5,
-                  3
-                ],
-                [
-                  5,
-                  4
-                ]
-              ],
-              "winAmount": 15
-            }
-          ],
-          "scatterPositions": [],
-          "multiplier": [
-            {
-              "position": [
-                4,
-                4
-              ],
-              "multiplier": 2
-            }
-          ],
-          "spinWin": 15
-        },
-        {
-          "reelView": [
-            [
-              "H3",
-              "H3",
-              "H3",
-              "L3",
-              "L3"
-            ],
-            [
-              "L4",
-              "H1",
-              "H1",
-              "L1",
-              "L1"
-            ],
-            [
-              "H3",
-              "H3",
-              "L5",
-              "L5",
-              "H2"
-            ],
-            [
-              "L3",
-              "L3",
-              "L4",
-              "L4",
-              "H3"
-            ],
-            [
-              "L2",
-              "L4",
-              "L3",
-              "L3",
-              "L6"
-            ],
-            [
-              "H1",
-              "H1",
-              "L6",
-              "H3",
-              "H3"
-            ]
-          ],
-          "scatterCount": 0,
-          "blustSymbols": [
-            {
-              "symbol": "H3",
-              "positions": [
-                [
-                  0,
-                  0
-                ],
-                [
-                  0,
-                  1
-                ],
-                [
-                  0,
-                  2
-                ],
-                [
-                  2,
-                  0
-                ],
-                [
-                  2,
-                  1
-                ],
-                [
-                  3,
-                  4
-                ],
-                [
-                  5,
-                  3
-                ],
-                [
-                  5,
-                  4
-                ]
-              ],
-              "winAmount": 40
-            }
-          ],
-          "scatterPositions": [],
-          "multiplier": [
-            {
-              "position": [
-                4,
-                4
-              ],
-              "multiplier": 2
-            },
-            {
-              "position": [
-                5,
-                2
-              ],
-              "multiplier": 2
-            }
-          ],
-          "spinWin": 40
-        },
-        {
-          "reelView": [
-            [
-              "L1",
-              "H4",
-              "H4",
-              "L3",
-              "L3"
-            ],
-            [
-              "L4",
-              "H1",
-              "H1",
-              "L1",
-              "L1"
-            ],
-            [
-              "H1",
-              "H1",
-              "L5",
-              "L5",
-              "H2"
-            ],
-            [
-              "L4",
-              "L3",
-              "L3",
-              "L4",
-              "L4"
-            ],
-            [
-              "L2",
-              "L4",
-              "L3",
-              "L3",
-              "L6"
-            ],
-            [
-              "L4",
-              "L6",
-              "H1",
-              "H1",
-              "L6"
-            ]
-          ],
-          "scatterCount": 0,
-          "blustSymbols": [],
-          "scatterPositions": [],
-          "multiplier": [
-            {
-              "position": [
-                4,
-                4
-              ],
-              "multiplier": 2
-            },
-            {
-              "position": [
-                5,
-                1
-              ],
-              "multiplier": 3
-            },
-            {
-              "position": [
-                5,
-                4
-              ],
-              "multiplier": 2
-            }
-          ],
-          "spinWin": 0
-        }
-      ]
-    },
-    {
-      "cascadeData": [
-        {
-          "reelView": [
-            [
-              "SC",
-              "L2",
-              "H1",
-              "L3",
-              "L3"
-            ],
-            [
-              "L1",
-              "L2",
-              "L2",
-              "H4",
-              "H2"
-            ],
-            [
-              "H1",
-              "L3",
-              "H2",
-              "SC",
-              "H1"
-            ],
-            [
-              "H3",
-              "H2",
-              "SC",
-              "L5",
-              "H3"
-            ],
-            [
-              "L4",
-              "L4",
-              "L4",
-              "L5",
-              "L1"
-            ],
-            [
-              "L5",
-              "H3",
-              "H1",
-              "H2",
-              "SC"
-            ]
-          ],
-          "scatterCount": 4,
-          "blustSymbols": [],
-          "scatterPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "multiplier": [],
-          "spinWin": 0
-        }
-      ],
-      "highestExposure": 0,
-      "bet": "20",
-      "totalWin": 803,
-      "baseWin": 0,
-      "nextFeature": "freespins",
-      "pendingFeature": 5,
-      "featureResults": [
-        {
-          "featureType": "freespins",
-          "featureTriggerPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "spinResults": [
-            {
-              "cascadeData": [
-                {
-                  "reelView": [
-                    [
-                      "L5",
-                      "L5",
-                      "L3",
-                      "L3",
-                      "L1"
-                    ],
-                    [
-                      "L4",
-                      "L5",
-                      "L5",
-                      "L2",
-                      "L2"
-                    ],
-                    [
-                      "L4",
-                      "L3",
-                      "L3",
-                      "L5",
-                      "L5"
-                    ],
-                    [
-                      "H4",
-                      "L5",
-                      "L5",
-                      "L2",
-                      "L2"
-                    ],
-                    [
-                      "L4",
-                      "L2",
-                      "L2",
-                      "L5",
-                      "L5"
-                    ],
-                    [
-                      "SC",
-                      "L5",
-                      "L5",
-                      "H1",
-                      "H1"
-                    ]
-                  ],
-                  "scatterCount": 1,
-                  "blustSymbols": [
-                    {
-                      "symbol": "L5",
-                      "positions": [
-                        [
-                          0,
-                          0
-                        ],
-                        [
-                          0,
-                          1
-                        ],
-                        [
-                          1,
-                          1
-                        ],
-                        [
-                          1,
-                          2
-                        ],
-                        [
-                          2,
-                          3
-                        ],
-                        [
-                          2,
-                          4
-                        ],
-                        [
-                          3,
-                          1
-                        ],
-                        [
-                          3,
-                          2
-                        ],
-                        [
-                          4,
-                          3
-                        ],
-                        [
-                          4,
-                          4
-                        ],
-                        [
-                          5,
-                          1
-                        ],
-                        [
-                          5,
-                          2
-                        ]
-                      ],
-                      "winAmount": 40
-                    }
-                  ],
-                  "scatterPositions": [
-                    5
-                  ],
-                  "multiplier": [],
-                  "spinWin": 40
-                },
-                {
-                  "reelView": [
-                    [
-                      "L3",
-                      "L1",
-                      "L3",
-                      "L3",
-                      "L1"
-                    ],
-                    [
-                      "L3",
-                      "L3",
-                      "L4",
-                      "L2",
-                      "L2"
-                    ],
-                    [
-                      "L1",
-                      "L1",
-                      "L4",
-                      "L3",
-                      "L3"
-                    ],
-                    [
-                      "H3",
-                      "H3",
-                      "H4",
-                      "L2",
-                      "L2"
-                    ],
-                    [
-                      "L3",
-                      "L3",
-                      "L4",
-                      "L2",
-                      "L2"
-                    ],
-                    [
-                      "H2",
-                      "H2",
-                      "SC",
-                      "H1",
-                      "H1"
-                    ]
-                  ],
-                  "scatterCount": 1,
-                  "blustSymbols": [
-                    {
-                      "symbol": "L3",
-                      "positions": [
-                        [
-                          0,
-                          0
-                        ],
-                        [
-                          0,
-                          2
-                        ],
-                        [
-                          0,
-                          3
-                        ],
-                        [
-                          1,
-                          0
-                        ],
-                        [
-                          1,
-                          1
-                        ],
-                        [
-                          2,
-                          3
-                        ],
-                        [
-                          2,
-                          4
-                        ],
-                        [
-                          4,
-                          0
-                        ],
-                        [
-                          4,
-                          1
-                        ]
-                      ],
-                      "winAmount": 10
-                    }
-                  ],
-                  "scatterPositions": [
-                    17
-                  ],
-                  "multiplier": [],
-                  "spinWin": 10
-                },
-                {
-                  "reelView": [
-                    [
-                      "L5",
-                      "H2",
-                      "H2",
-                      "L1",
-                      "L1"
-                    ],
-                    [
-                      "H1",
-                      "L5",
-                      "L4",
-                      "L2",
-                      "L2"
-                    ],
-                    [
-                      "L2",
-                      "H3",
-                      "L1",
-                      "L1",
-                      "L4"
-                    ],
-                    [
-                      "H3",
-                      "H3",
-                      "H4",
-                      "L2",
-                      "L2"
-                    ],
-                    [
-                      "L3",
-                      "L3",
-                      "L4",
-                      "L2",
-                      "L2"
-                    ],
-                    [
-                      "H2",
-                      "H2",
-                      "SC",
-                      "H1",
-                      "H1"
-                    ]
-                  ],
-                  "scatterCount": 1,
-                  "blustSymbols": [],
-                  "scatterPositions": [
-                    17
-                  ],
-                  "multiplier": [],
-                  "spinWin": 0
-                }
-              ],
-              "totalWin": 50,
-              "currentCount": 5,
-              "multipliers": [],
-              "totalMultiplier": 0,
-              "highestExposure": 2.5
-            }
-          ],
-          "totalWin": 803,
-          "currentCount": 5,
-          "currentWin": 50,
-          "retrigger": false,
-          "retriggerCount": 0,
-          "totalCount": 10,
-          "closed": false,
-          "multiplier": null
-        }
-      ],
-      "active": true,
-      "multiplier": 1,
-      "winning_places": [],
-      "symbols": [
-        {
-          "reelView": [
-            [
-              "L5",
-              "L5",
-              "L3",
-              "L3",
-              "L1"
-            ],
-            [
-              "L4",
-              "L5",
-              "L5",
-              "L2",
-              "L2"
-            ],
-            [
-              "L4",
-              "L3",
-              "L3",
-              "L5",
-              "L5"
-            ],
-            [
-              "H4",
-              "L5",
-              "L5",
-              "L2",
-              "L2"
-            ],
-            [
-              "L4",
-              "L2",
-              "L2",
-              "L5",
-              "L5"
-            ],
-            [
-              "SC",
-              "L5",
-              "L5",
-              "H1",
-              "H1"
-            ]
-          ],
-          "scatterCount": 1,
-          "blustSymbols": [
-            {
-              "symbol": "L5",
-              "positions": [
-                [
-                  0,
-                  0
-                ],
-                [
-                  0,
-                  1
-                ],
-                [
-                  1,
-                  1
-                ],
-                [
-                  1,
-                  2
-                ],
-                [
-                  2,
-                  3
-                ],
-                [
-                  2,
-                  4
-                ],
-                [
-                  3,
-                  1
-                ],
-                [
-                  3,
-                  2
-                ],
-                [
-                  4,
-                  3
-                ],
-                [
-                  4,
-                  4
-                ],
-                [
-                  5,
-                  1
-                ],
-                [
-                  5,
-                  2
-                ]
-              ],
-              "winAmount": 40
-            }
-          ],
-          "scatterPositions": [
-            5
-          ],
-          "multiplier": [],
-          "spinWin": 40
-        },
-        {
-          "reelView": [
-            [
-              "L3",
-              "L1",
-              "L3",
-              "L3",
-              "L1"
-            ],
-            [
-              "L3",
-              "L3",
-              "L4",
-              "L2",
-              "L2"
-            ],
-            [
-              "L1",
-              "L1",
-              "L4",
-              "L3",
-              "L3"
-            ],
-            [
-              "H3",
-              "H3",
-              "H4",
-              "L2",
-              "L2"
-            ],
-            [
-              "L3",
-              "L3",
-              "L4",
-              "L2",
-              "L2"
-            ],
-            [
-              "H2",
-              "H2",
-              "SC",
-              "H1",
-              "H1"
-            ]
-          ],
-          "scatterCount": 1,
-          "blustSymbols": [
-            {
-              "symbol": "L3",
-              "positions": [
-                [
-                  0,
-                  0
-                ],
-                [
-                  0,
-                  2
-                ],
-                [
-                  0,
-                  3
-                ],
-                [
-                  1,
-                  0
-                ],
-                [
-                  1,
-                  1
-                ],
-                [
-                  2,
-                  3
-                ],
-                [
-                  2,
-                  4
-                ],
-                [
-                  4,
-                  0
-                ],
-                [
-                  4,
-                  1
-                ]
-              ],
-              "winAmount": 10
-            }
-          ],
-          "scatterPositions": [
-            17
-          ],
-          "multiplier": [],
-          "spinWin": 10
-        },
-        {
-          "reelView": [
-            [
-              "L5",
-              "H2",
-              "H2",
-              "L1",
-              "L1"
-            ],
-            [
-              "H1",
-              "L5",
-              "L4",
-              "L2",
-              "L2"
-            ],
-            [
-              "L2",
-              "H3",
-              "L1",
-              "L1",
-              "L4"
-            ],
-            [
-              "H3",
-              "H3",
-              "H4",
-              "L2",
-              "L2"
-            ],
-            [
-              "L3",
-              "L3",
-              "L4",
-              "L2",
-              "L2"
-            ],
-            [
-              "H2",
-              "H2",
-              "SC",
-              "H1",
-              "H1"
-            ]
-          ],
-          "scatterCount": 1,
-          "blustSymbols": [],
-          "scatterPositions": [
-            17
-          ],
-          "multiplier": [],
-          "spinWin": 0
-        }
-      ]
-    },
-    {
-      "cascadeData": [
-        {
-          "reelView": [
-            [
-              "SC",
-              "L2",
-              "H1",
-              "L3",
-              "L3"
-            ],
-            [
-              "L1",
-              "L2",
-              "L2",
-              "H4",
-              "H2"
-            ],
-            [
-              "H1",
-              "L3",
-              "H2",
-              "SC",
-              "H1"
-            ],
-            [
-              "H3",
-              "H2",
-              "SC",
-              "L5",
-              "H3"
-            ],
-            [
-              "L4",
-              "L4",
-              "L4",
-              "L5",
-              "L1"
-            ],
-            [
-              "L5",
-              "H3",
-              "H1",
-              "H2",
-              "SC"
-            ]
-          ],
-          "scatterCount": 4,
-          "blustSymbols": [],
-          "scatterPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "multiplier": [],
-          "spinWin": 0
-        }
-      ],
-      "highestExposure": 0,
-      "bet": "20",
-      "totalWin": 803,
-      "baseWin": 0,
-      "nextFeature": "freespins",
-      "pendingFeature": 4,
-      "featureResults": [
-        {
-          "featureType": "freespins",
-          "featureTriggerPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "spinResults": [
-            {
-              "cascadeData": [
-                {
-                  "reelView": [
-                    [
-                      "L3",
-                      "H3",
-                      "H3",
-                      "L4",
-                      "L4"
-                    ],
-                    [
-                      "L5",
-                      "H3",
-                      "H3",
-                      "H4",
-                      "H4"
-                    ],
-                    [
-                      "L1",
-                      "L1",
-                      "H1",
-                      "H1",
-                      "H2"
-                    ],
-                    [
-                      "SC",
-                      "H2",
-                      "H2",
-                      "H4",
-                      "H4"
-                    ],
-                    [
-                      "L3",
-                      "L5",
-                      "L5",
-                      "L5",
-                      "H1"
-                    ],
-                    [
-                      "L5",
-                      "L5",
-                      "L1",
-                      "L1",
-                      "L5"
-                    ]
-                  ],
-                  "scatterCount": 1,
-                  "blustSymbols": [],
-                  "scatterPositions": [
-                    3
-                  ],
-                  "multiplier": [],
-                  "spinWin": 0
-                }
-              ],
-              "totalWin": 0,
-              "currentCount": 6,
-              "multipliers": [],
-              "totalMultiplier": 0,
-              "highestExposure": 0
-            }
-          ],
-          "totalWin": 803,
-          "currentCount": 6,
-          "currentWin": 0,
-          "retrigger": false,
-          "retriggerCount": 0,
-          "totalCount": 10,
-          "closed": false,
-          "multiplier": null
-        }
-      ],
-      "active": true,
-      "multiplier": 1,
-      "winning_places": [],
-      "symbols": [
-        {
-          "reelView": [
-            [
-              "L3",
-              "H3",
-              "H3",
-              "L4",
-              "L4"
-            ],
-            [
-              "L5",
-              "H3",
-              "H3",
-              "H4",
-              "H4"
-            ],
-            [
-              "L1",
-              "L1",
-              "H1",
-              "H1",
-              "H2"
-            ],
-            [
-              "SC",
-              "H2",
-              "H2",
-              "H4",
-              "H4"
-            ],
-            [
-              "L3",
-              "L5",
-              "L5",
-              "L5",
-              "H1"
-            ],
-            [
-              "L5",
-              "L5",
-              "L1",
-              "L1",
-              "L5"
-            ]
-          ],
-          "scatterCount": 1,
-          "blustSymbols": [],
-          "scatterPositions": [
-            3
-          ],
-          "multiplier": [],
-          "spinWin": 0
-        }
-      ]
-    },
-    {
-      "cascadeData": [
-        {
-          "reelView": [
-            [
-              "SC",
-              "L2",
-              "H1",
-              "L3",
-              "L3"
-            ],
-            [
-              "L1",
-              "L2",
-              "L2",
-              "H4",
-              "H2"
-            ],
-            [
-              "H1",
-              "L3",
-              "H2",
-              "SC",
-              "H1"
-            ],
-            [
-              "H3",
-              "H2",
-              "SC",
-              "L5",
-              "H3"
-            ],
-            [
-              "L4",
-              "L4",
-              "L4",
-              "L5",
-              "L1"
-            ],
-            [
-              "L5",
-              "H3",
-              "H1",
-              "H2",
-              "SC"
-            ]
-          ],
-          "scatterCount": 4,
-          "blustSymbols": [],
-          "scatterPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "multiplier": [],
-          "spinWin": 0
-        }
-      ],
-      "highestExposure": 0,
-      "bet": "20",
-      "totalWin": 808,
-      "baseWin": 0,
-      "nextFeature": "freespins",
-      "pendingFeature": 3,
-      "featureResults": [
-        {
-          "featureType": "freespins",
-          "featureTriggerPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "spinResults": [
-            {
-              "cascadeData": [
-                {
-                  "reelView": [
-                    [
-                      "L5",
-                      "L5",
-                      "L2",
-                      "L2",
-                      "L4"
-                    ],
-                    [
-                      "L3",
-                      "H3",
-                      "H3",
-                      "L1",
-                      "L1"
-                    ],
-                    [
-                      "L2",
-                      "L5",
-                      "L5",
-                      "L1",
-                      "L1"
-                    ],
-                    [
-                      "H2",
-                      "H4",
-                      "H4",
-                      "L1",
-                      "L1"
-                    ],
-                    [
-                      "L1",
-                      "H3",
-                      "H3",
-                      "L5",
-                      "L5"
-                    ],
-                    [
-                      "L4",
-                      "L4",
-                      "L5",
-                      "L5",
-                      "L4"
-                    ]
-                  ],
-                  "scatterCount": 0,
-                  "blustSymbols": [
-                    {
-                      "symbol": "L5",
-                      "positions": [
-                        [
-                          0,
-                          0
-                        ],
-                        [
-                          0,
-                          1
-                        ],
-                        [
-                          2,
-                          1
-                        ],
-                        [
-                          2,
-                          2
-                        ],
-                        [
-                          4,
-                          3
-                        ],
-                        [
-                          4,
-                          4
-                        ],
-                        [
-                          5,
-                          2
-                        ],
-                        [
-                          5,
-                          3
-                        ]
-                      ],
-                      "winAmount": 5
-                    }
-                  ],
-                  "scatterPositions": [],
-                  "multiplier": [],
-                  "spinWin": 5
-                },
-                {
-                  "reelView": [
-                    [
-                      "L3",
-                      "L3",
-                      "L2",
-                      "L2",
-                      "L4"
-                    ],
-                    [
-                      "L3",
-                      "H3",
-                      "H3",
-                      "L1",
-                      "L1"
-                    ],
-                    [
-                      "H1",
-                      "H1",
-                      "L2",
-                      "L1",
-                      "L1"
-                    ],
-                    [
-                      "H2",
-                      "H4",
-                      "H4",
-                      "L1",
-                      "L1"
-                    ],
-                    [
-                      "H1",
-                      "H1",
-                      "L1",
-                      "H3",
-                      "H3"
-                    ],
-                    [
-                      "H1",
-                      "H1",
-                      "L4",
-                      "L4",
-                      "L4"
-                    ]
-                  ],
-                  "scatterCount": 0,
-                  "blustSymbols": [],
-                  "scatterPositions": [],
-                  "multiplier": [],
-                  "spinWin": 0
-                }
-              ],
-              "totalWin": 5,
-              "currentCount": 7,
-              "multipliers": [],
-              "totalMultiplier": 0,
-              "highestExposure": 0.25
-            }
-          ],
-          "totalWin": 808,
-          "currentCount": 7,
-          "currentWin": 5,
-          "retrigger": false,
-          "retriggerCount": 0,
-          "totalCount": 10,
-          "closed": false,
-          "multiplier": null
-        }
-      ],
-      "active": true,
-      "multiplier": 1,
-      "winning_places": [],
-      "symbols": [
-        {
-          "reelView": [
-            [
-              "L5",
-              "L5",
-              "L2",
-              "L2",
-              "L4"
-            ],
-            [
-              "L3",
-              "H3",
-              "H3",
-              "L1",
-              "L1"
-            ],
-            [
-              "L2",
-              "L5",
-              "L5",
-              "L1",
-              "L1"
-            ],
-            [
-              "H2",
-              "H4",
-              "H4",
-              "L1",
-              "L1"
-            ],
-            [
-              "L1",
-              "H3",
-              "H3",
-              "L5",
-              "L5"
-            ],
-            [
-              "L4",
-              "L4",
-              "L5",
-              "L5",
-              "L4"
-            ]
-          ],
-          "scatterCount": 0,
-          "blustSymbols": [
-            {
-              "symbol": "L5",
-              "positions": [
-                [
-                  0,
-                  0
-                ],
-                [
-                  0,
-                  1
-                ],
-                [
-                  2,
-                  1
-                ],
-                [
-                  2,
-                  2
-                ],
-                [
-                  4,
-                  3
-                ],
-                [
-                  4,
-                  4
-                ],
-                [
-                  5,
-                  2
-                ],
-                [
-                  5,
-                  3
-                ]
-              ],
-              "winAmount": 5
-            }
-          ],
-          "scatterPositions": [],
-          "multiplier": [],
-          "spinWin": 5
-        },
-        {
-          "reelView": [
-            [
-              "L3",
-              "L3",
-              "L2",
-              "L2",
-              "L4"
-            ],
-            [
-              "L3",
-              "H3",
-              "H3",
-              "L1",
-              "L1"
-            ],
-            [
-              "H1",
-              "H1",
-              "L2",
-              "L1",
-              "L1"
-            ],
-            [
-              "H2",
-              "H4",
-              "H4",
-              "L1",
-              "L1"
-            ],
-            [
-              "H1",
-              "H1",
-              "L1",
-              "H3",
-              "H3"
-            ],
-            [
-              "H1",
-              "H1",
-              "L4",
-              "L4",
-              "L4"
-            ]
-          ],
-          "scatterCount": 0,
-          "blustSymbols": [],
-          "scatterPositions": [],
-          "multiplier": [],
-          "spinWin": 0
-        }
-      ]
-    },
-    {
-      "cascadeData": [
-        {
-          "reelView": [
-            [
-              "SC",
-              "L2",
-              "H1",
-              "L3",
-              "L3"
-            ],
-            [
-              "L1",
-              "L2",
-              "L2",
-              "H4",
-              "H2"
-            ],
-            [
-              "H1",
-              "L3",
-              "H2",
-              "SC",
-              "H1"
-            ],
-            [
-              "H3",
-              "H2",
-              "SC",
-              "L5",
-              "H3"
-            ],
-            [
-              "L4",
-              "L4",
-              "L4",
-              "L5",
-              "L1"
-            ],
-            [
-              "L5",
-              "H3",
-              "H1",
-              "H2",
-              "SC"
-            ]
-          ],
-          "scatterCount": 4,
-          "blustSymbols": [],
-          "scatterPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "multiplier": [],
-          "spinWin": 0
-        }
-      ],
-      "highestExposure": 0,
-      "bet": "20",
-      "totalWin": 828,
-      "baseWin": 0,
-      "nextFeature": "freespins",
-      "pendingFeature": 2,
-      "featureResults": [
-        {
-          "featureType": "freespins",
-          "featureTriggerPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "spinResults": [
-            {
-              "cascadeData": [
-                {
-                  "reelView": [
-                    [
-                      "L1",
-                      "L1",
-                      "H2",
-                      "H2",
-                      "L2"
-                    ],
-                    [
-                      "H4",
-                      "H4",
-                      "L2",
-                      "L2",
-                      "H1"
-                    ],
-                    [
-                      "H4",
-                      "H1",
-                      "H1",
-                      "L1",
-                      "L1"
-                    ],
-                    [
-                      "L2",
-                      "L5",
-                      "L5",
-                      "L1",
-                      "L1"
-                    ],
-                    [
-                      "L3",
-                      "L3",
-                      "H1",
-                      "H1",
-                      "H4"
-                    ],
-                    [
-                      "L2",
-                      "L2",
-                      "L1",
-                      "L1",
-                      "H1"
-                    ]
-                  ],
-                  "scatterCount": 0,
-                  "blustSymbols": [
-                    {
-                      "symbol": "L1",
-                      "positions": [
-                        [
-                          0,
-                          0
-                        ],
-                        [
-                          0,
-                          1
-                        ],
-                        [
-                          2,
-                          3
-                        ],
-                        [
-                          2,
-                          4
-                        ],
-                        [
-                          3,
-                          3
-                        ],
-                        [
-                          3,
-                          4
-                        ],
-                        [
-                          5,
-                          2
-                        ],
-                        [
-                          5,
-                          3
-                        ]
-                      ],
-                      "winAmount": 20
-                    }
-                  ],
-                  "scatterPositions": [],
-                  "multiplier": [],
-                  "spinWin": 20
-                },
-                {
-                  "reelView": [
-                    [
-                      "H3",
-                      "H3",
-                      "H2",
-                      "H2",
-                      "L2"
-                    ],
-                    [
-                      "H4",
-                      "H4",
-                      "L2",
-                      "L2",
-                      "H1"
-                    ],
-                    [
-                      "L1",
-                      "L1",
-                      "H4",
-                      "H1",
-                      "H1"
-                    ],
-                    [
-                      "L4",
-                      "L4",
-                      "L2",
-                      "L5",
-                      "L5"
-                    ],
-                    [
-                      "L3",
-                      "L3",
-                      "H1",
-                      "H1",
-                      "H4"
-                    ],
-                    [
-                      "H2",
-                      "H2",
-                      "L2",
-                      "L2",
-                      "H1"
-                    ]
-                  ],
-                  "scatterCount": 0,
-                  "blustSymbols": [],
-                  "scatterPositions": [],
-                  "multiplier": [],
-                  "spinWin": 0
-                }
-              ],
-              "totalWin": 20,
-              "currentCount": 8,
-              "multipliers": [],
-              "totalMultiplier": 0,
-              "highestExposure": 1
-            }
-          ],
-          "totalWin": 828,
-          "currentCount": 8,
-          "currentWin": 20,
-          "retrigger": false,
-          "retriggerCount": 0,
-          "totalCount": 10,
-          "closed": false,
-          "multiplier": null
-        }
-      ],
-      "active": true,
-      "multiplier": 1,
-      "winning_places": [],
-      "symbols": [
-        {
-          "reelView": [
-            [
-              "L1",
-              "L1",
-              "H2",
-              "H2",
-              "L2"
-            ],
-            [
-              "H4",
-              "H4",
-              "L2",
-              "L2",
-              "H1"
-            ],
-            [
-              "H4",
-              "H1",
-              "H1",
-              "L1",
-              "L1"
-            ],
-            [
-              "L2",
-              "L5",
-              "L5",
-              "L1",
-              "L1"
-            ],
-            [
-              "L3",
-              "L3",
-              "H1",
-              "H1",
-              "H4"
-            ],
-            [
-              "L2",
-              "L2",
-              "L1",
-              "L1",
-              "H1"
-            ]
-          ],
-          "scatterCount": 0,
-          "blustSymbols": [
-            {
-              "symbol": "L1",
-              "positions": [
-                [
-                  0,
-                  0
-                ],
-                [
-                  0,
-                  1
-                ],
-                [
-                  2,
-                  3
-                ],
-                [
-                  2,
-                  4
-                ],
-                [
-                  3,
-                  3
-                ],
-                [
-                  3,
-                  4
-                ],
-                [
-                  5,
-                  2
-                ],
-                [
-                  5,
-                  3
-                ]
-              ],
-              "winAmount": 20
-            }
-          ],
-          "scatterPositions": [],
-          "multiplier": [],
-          "spinWin": 20
-        },
-        {
-          "reelView": [
-            [
-              "H3",
-              "H3",
-              "H2",
-              "H2",
-              "L2"
-            ],
-            [
-              "H4",
-              "H4",
-              "L2",
-              "L2",
-              "H1"
-            ],
-            [
-              "L1",
-              "L1",
-              "H4",
-              "H1",
-              "H1"
-            ],
-            [
-              "L4",
-              "L4",
-              "L2",
-              "L5",
-              "L5"
-            ],
-            [
-              "L3",
-              "L3",
-              "H1",
-              "H1",
-              "H4"
-            ],
-            [
-              "H2",
-              "H2",
-              "L2",
-              "L2",
-              "H1"
-            ]
-          ],
-          "scatterCount": 0,
-          "blustSymbols": [],
-          "scatterPositions": [],
-          "multiplier": [],
-          "spinWin": 0
-        }
-      ]
-    },
-    {
-      "cascadeData": [
-        {
-          "reelView": [
-            [
-              "SC",
-              "L2",
-              "H1",
-              "L3",
-              "L3"
-            ],
-            [
-              "L1",
-              "L2",
-              "L2",
-              "H4",
-              "H2"
-            ],
-            [
-              "H1",
-              "L3",
-              "H2",
-              "SC",
-              "H1"
-            ],
-            [
-              "H3",
-              "H2",
-              "SC",
-              "L5",
-              "H3"
-            ],
-            [
-              "L4",
-              "L4",
-              "L4",
-              "L5",
-              "L1"
-            ],
-            [
-              "L5",
-              "H3",
-              "H1",
-              "H2",
-              "SC"
-            ]
-          ],
-          "scatterCount": 4,
-          "blustSymbols": [],
-          "scatterPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "multiplier": [],
-          "spinWin": 0
-        }
-      ],
-      "highestExposure": 0,
-      "bet": "20",
-      "totalWin": 848,
-      "baseWin": 0,
-      "nextFeature": "freespins",
-      "pendingFeature": 1,
-      "featureResults": [
-        {
-          "featureType": "freespins",
-          "featureTriggerPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "spinResults": [
-            {
-              "cascadeData": [
-                {
-                  "reelView": [
-                    [
-                      "L4",
-                      "L2",
-                      "L2",
-                      "L3",
-                      "L3"
-                    ],
-                    [
-                      "L5",
-                      "L5",
-                      "L3",
-                      "L3",
-                      "H3"
-                    ],
-                    [
-                      "L5",
-                      "H2",
-                      "H2",
-                      "L3",
-                      "L3"
-                    ],
-                    [
-                      "H3",
-                      "H3",
-                      "L5",
-                      "L5",
-                      "L3"
-                    ],
-                    [
-                      "L1",
-                      "L1",
-                      "L3",
-                      "L3",
-                      "L5"
-                    ],
-                    [
-                      "H2",
-                      "L1",
-                      "L1",
-                      "L3",
-                      "L3"
-                    ]
-                  ],
-                  "scatterCount": 0,
-                  "blustSymbols": [
-                    {
-                      "symbol": "L3",
-                      "positions": [
-                        [
-                          0,
-                          3
-                        ],
-                        [
-                          0,
-                          4
-                        ],
-                        [
-                          1,
-                          2
-                        ],
-                        [
-                          1,
-                          3
-                        ],
-                        [
-                          2,
-                          3
-                        ],
-                        [
-                          2,
-                          4
-                        ],
-                        [
-                          3,
-                          4
-                        ],
-                        [
-                          4,
-                          2
-                        ],
-                        [
-                          4,
-                          3
-                        ],
-                        [
-                          5,
-                          3
-                        ],
-                        [
-                          5,
-                          4
-                        ]
-                      ],
-                      "winAmount": 20
-                    }
-                  ],
-                  "scatterPositions": [],
-                  "multiplier": [],
-                  "spinWin": 20
-                },
-                {
-                  "reelView": [
-                    [
-                      "H1",
-                      "H1",
-                      "L4",
-                      "L2",
-                      "L2"
-                    ],
-                    [
-                      "H4",
-                      "H4",
-                      "L5",
-                      "L5",
-                      "H3"
-                    ],
-                    [
-                      "L1",
-                      "L1",
-                      "L5",
-                      "H2",
-                      "H2"
-                    ],
-                    [
-                      "H3",
-                      "H3",
-                      "H3",
-                      "L5",
-                      "L5"
-                    ],
-                    [
-                      "H2",
-                      "H2",
-                      "L1",
-                      "L1",
-                      "L5"
-                    ],
-                    [
-                      "L4",
-                      "L4",
-                      "H2",
-                      "L1",
-                      "L1"
-                    ]
-                  ],
-                  "scatterCount": 0,
-                  "blustSymbols": [],
-                  "scatterPositions": [],
-                  "multiplier": [],
-                  "spinWin": 0
-                }
-              ],
-              "totalWin": 20,
-              "currentCount": 9,
-              "multipliers": [],
-              "totalMultiplier": 0,
-              "highestExposure": 1
-            }
-          ],
-          "totalWin": 848,
-          "currentCount": 9,
-          "currentWin": 20,
-          "retrigger": false,
-          "retriggerCount": 0,
-          "totalCount": 10,
-          "closed": false,
-          "multiplier": null
-        }
-      ],
-      "active": true,
-      "multiplier": 1,
-      "winning_places": [],
-      "symbols": [
-        {
-          "reelView": [
-            [
-              "L4",
-              "L2",
-              "L2",
-              "L3",
-              "L3"
-            ],
-            [
-              "L5",
-              "L5",
-              "L3",
-              "L3",
-              "H3"
-            ],
-            [
-              "L5",
-              "H2",
-              "H2",
-              "L3",
-              "L3"
-            ],
-            [
-              "H3",
-              "H3",
-              "L5",
-              "L5",
-              "L3"
-            ],
-            [
-              "L1",
-              "L1",
-              "L3",
-              "L3",
-              "L5"
-            ],
-            [
-              "H2",
-              "L1",
-              "L1",
-              "L3",
-              "L3"
-            ]
-          ],
-          "scatterCount": 0,
-          "blustSymbols": [
-            {
-              "symbol": "L3",
-              "positions": [
-                [
-                  0,
-                  3
-                ],
-                [
-                  0,
-                  4
-                ],
-                [
-                  1,
-                  2
-                ],
-                [
-                  1,
-                  3
-                ],
-                [
-                  2,
-                  3
-                ],
-                [
-                  2,
-                  4
-                ],
-                [
-                  3,
-                  4
-                ],
-                [
-                  4,
-                  2
-                ],
-                [
-                  4,
-                  3
-                ],
-                [
-                  5,
-                  3
-                ],
-                [
-                  5,
-                  4
-                ]
-              ],
-              "winAmount": 20
-            }
-          ],
-          "scatterPositions": [],
-          "multiplier": [],
-          "spinWin": 20
-        },
-        {
-          "reelView": [
-            [
-              "H1",
-              "H1",
-              "L4",
-              "L2",
-              "L2"
-            ],
-            [
-              "H4",
-              "H4",
-              "L5",
-              "L5",
-              "H3"
-            ],
-            [
-              "L1",
-              "L1",
-              "L5",
-              "H2",
-              "H2"
-            ],
-            [
-              "H3",
-              "H3",
-              "H3",
-              "L5",
-              "L5"
-            ],
-            [
-              "H2",
-              "H2",
-              "L1",
-              "L1",
-              "L5"
-            ],
-            [
-              "L4",
-              "L4",
-              "H2",
-              "L1",
-              "L1"
-            ]
-          ],
-          "scatterCount": 0,
-          "blustSymbols": [],
-          "scatterPositions": [],
-          "multiplier": [],
-          "spinWin": 0
-        }
-      ]
-    },
-    {
-      "cascadeData": [
-        {
-          "reelView": [
-            [
-              "SC",
-              "L2",
-              "H1",
-              "L3",
-              "L3"
-            ],
-            [
-              "L1",
-              "L2",
-              "L2",
-              "H4",
-              "H2"
-            ],
-            [
-              "H1",
-              "L3",
-              "H2",
-              "SC",
-              "H1"
-            ],
-            [
-              "H3",
-              "H2",
-              "SC",
-              "L5",
-              "H3"
-            ],
-            [
-              "L4",
-              "L4",
-              "L4",
-              "L5",
-              "L1"
-            ],
-            [
-              "L5",
-              "H3",
-              "H1",
-              "H2",
-              "SC"
-            ]
-          ],
-          "scatterCount": 4,
-          "blustSymbols": [],
-          "scatterPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "multiplier": [],
-          "spinWin": 0
-        }
-      ],
-      "highestExposure": 0,
-      "bet": "20",
-      "totalWin": 848,
-      "baseWin": 0,
-      "nextFeature": null,
-      "pendingFeature": 0,
-      "featureResults": [
-        {
-          "featureType": "freespins",
-          "featureTriggerPositions": [
-            0,
-            20,
-            15,
-            29
-          ],
-          "spinResults": [
-            {
-              "cascadeData": [
-                {
-                  "reelView": [
-                    [
-                      "L5",
-                      "H4",
-                      "H4",
-                      "L1",
-                      "L1"
-                    ],
-                    [
-                      "L5",
-                      "L5",
-                      "L3",
-                      "L3",
-                      "H3"
-                    ],
-                    [
-                      "L5",
-                      "L5",
-                      "L2",
-                      "L2",
-                      "L5"
-                    ],
-                    [
-                      "L2",
-                      "L2",
-                      "SC",
-                      "H2",
-                      "H2"
-                    ],
-                    [
-                      "L5",
-                      "H2",
-                      "H2",
-                      "L4",
-                      "L4"
-                    ],
-                    [
-                      "L3",
-                      "L3",
-                      "L2",
-                      "L2",
-                      "L4"
-                    ]
-                  ],
-                  "scatterCount": 1,
-                  "blustSymbols": [],
-                  "scatterPositions": [
-                    15
-                  ],
-                  "multiplier": [],
-                  "spinWin": 0
-                }
-              ],
-              "totalWin": 0,
-              "currentCount": 10,
-              "multipliers": [],
-              "totalMultiplier": 0,
-              "highestExposure": 0
-            }
-          ],
-          "totalWin": 848,
-          "currentCount": 10,
-          "currentWin": 0,
-          "retrigger": false,
-          "retriggerCount": 0,
-          "totalCount": 10,
-          "closed": true,
-          "multiplier": null,
-          "isAborted": true
-        }
-      ],
-      "active": false,
-      "multiplier": 1,
-      "winning_places": [],
-      "symbols": [
-        {
-          "reelView": [
-            [
-              "L4",
-              "L2",
-              "L2",
-              "L3",
-              "L3"
-            ],
-            [
-              "L5",
-              "L5",
-              "L3",
-              "L3",
-              "H3"
-            ],
-            [
-              "L5",
-              "H2",
-              "H2",
-              "L3",
-              "L3"
-            ],
-            [
-              "H3",
-              "H3",
-              "L5",
-              "L5",
-              "L3"
-            ],
-            [
-              "L1",
-              "L1",
-              "L3",
-              "L3",
-              "L5"
-            ],
-            [
-              "H2",
-              "L1",
-              "L1",
-              "L3",
-              "L3"
-            ]
-          ],
-          "scatterCount": 0,
-          "blustSymbols": [
-            {
-              "symbol": "L3",
-              "positions": [
-                [
-                  0,
-                  3
-                ],
-                [
-                  0,
-                  4
-                ],
-                [
-                  1,
-                  2
-                ],
-                [
-                  1,
-                  3
-                ],
-                [
-                  2,
-                  3
-                ],
-                [
-                  2,
-                  4
-                ],
-                [
-                  3,
-                  4
-                ],
-                [
-                  4,
-                  2
-                ],
-                [
-                  4,
-                  3
-                ],
-                [
-                  5,
-                  3
-                ],
-                [
-                  5,
-                  4
-                ]
-              ],
-              "winAmount": 20
-            }
-          ],
-          "scatterPositions": [],
-          "multiplier": [],
-          "spinWin": 20
-        },
-        {
-          "reelView": [
-            [
-              "H1",
-              "H1",
-              "L4",
-              "L2",
-              "L2"
-            ],
-            [
-              "H4",
-              "H4",
-              "L5",
-              "L5",
-              "H3"
-            ],
-            [
-              "L1",
-              "L1",
-              "L5",
-              "H2",
-              "H2"
-            ],
-            [
-              "H3",
-              "H3",
-              "H3",
-              "L5",
-              "L5"
-            ],
-            [
-              "H2",
-              "H2",
-              "L1",
-              "L1",
-              "L5"
-            ],
-            [
-              "L4",
-              "L4",
-              "H2",
-              "L1",
-              "L1"
-            ]
-          ],
-          "scatterCount": 0,
-          "blustSymbols": [],
-          "scatterPositions": [],
-          "multiplier": [],
-          "spinWin": 0
-        }
-      ]
-    }
-  ]
+const styles = {
+  container: {
+    minHeight: '100vh',
+    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    padding: '20px 0'
+  },
+  wrapper: {
+    maxWidth: '1200px',
+    margin: '0 auto',
+    padding: '0 16px'
+  },
+  header: {
+    textAlign: 'center',
+    marginBottom: '40px',
+    color: 'white'
+  },
+  headerIcon: {
+    width: '60px',
+    height: '60px',
+    margin: '0 auto 20px',
+    background: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '24px',
+    backdropFilter: 'blur(10px)'
+  },
+  title: {
+    fontSize: '3rem',
+    fontWeight: '700',
+    margin: '0 0 16px 0',
+    textShadow: '0 4px 8px rgba(0,0,0,0.3)',
+    background: 'linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text'
+  },
+  subtitle: {
+    fontSize: '1.2rem',
+    opacity: '0.9',
+    fontWeight: '400'
+  },
+  card: {
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    backdropFilter: 'blur(20px)',
+    borderRadius: '20px',
+    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+    border: '1px solid rgba(255, 255, 255, 0.3)',
+    padding: '40px',
+    marginBottom: '30px'
+  },
+  formSection: {
+    marginBottom: '30px'
+  },
+  label: {
+    display: 'block',
+    fontSize: '15px',
+    fontWeight: '600',
+    color: '#374151',
+    marginBottom: '10px'
+  },
+  inputGroup: {
+    position: 'relative',
+    marginBottom: '20px'
+  },
+  inputIcon: {
+    position: 'absolute',
+    left: '16px',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    color: '#9ca3af',
+    fontSize: '18px',
+    zIndex: '1'
+  },
+  input: {
+    width: '100%',
+    padding: '16px 20px 16px 50px',
+    border: '2px solid #e5e7eb',
+    borderRadius: '12px',
+    fontSize: '16px',
+    color: 'black',
+    transition: 'all 0.3s ease',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    boxSizing: 'border-box',
+    outline: 'none'
+  },
+  inputFocus: {
+    borderColor: '#3b82f6',
+    boxShadow: '0 0 0 4px rgba(59, 130, 246, 0.1)',
+    transform: 'translateY(-1px)'
+  },
+  toggleButton: {
+    position: 'absolute',
+    right: '16px',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    background: 'none',
+    border: 'none',
+    color: '#9ca3af',
+    cursor: 'pointer',
+    padding: '8px',
+    borderRadius: '6px',
+    fontSize: '16px',
+    transition: 'all 0.2s ease',
+    zIndex: '1'
+  },
+  buttonGroup: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gap: '16px',
+    marginTop: '30px'
+  },
+  button: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '10px',
+    padding: '16px 24px',
+    border: 'none',
+    borderRadius: '12px',
+    fontSize: '16px',
+    fontWeight: '600',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
+    textDecoration: 'none',
+    position: 'relative',
+    overflow: 'hidden'
+  },
+  primaryButton: {
+    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    color: 'white'
+  },
+  secondaryButton: {
+    background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    color: 'white'
+  },
+  successButton: {
+    background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    color: 'white'
+  },
+  buttonHover: {
+    transform: 'translateY(-2px)',
+    boxShadow: '0 8px 25px rgba(0, 0, 0, 0.2)'
+  },
+  disabledButton: {
+    opacity: '0.6',
+    cursor: 'not-allowed',
+    transform: 'none'
+  },
+  statusCard: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '16px 20px',
+    borderRadius: '10px',
+    fontSize: '14px',
+    marginTop: '15px',
+    border: '1px solid'
+  },
+  successCard: {
+    backgroundColor: '#f0fdf4',
+    borderColor: '#bbf7d0',
+    color: '#166534'
+  },
+  infoCard: {
+    backgroundColor: '#eff6ff',
+    borderColor: '#bfdbfe',
+    color: '#1e40af'
+  },
+  errorCard: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    gap: '15px',
+    padding: '20px',
+    backgroundColor: '#fef2f2',
+    border: '1px solid #fecaca',
+    borderRadius: '12px',
+    marginTop: '25px'
+  },
+  errorIcon: {
+    color: '#dc2626',
+    fontSize: '20px',
+    marginTop: '2px',
+    flexShrink: 0
+  },
+  errorTitle: {
+    fontWeight: '600',
+    color: '#dc2626',
+    marginBottom: '8px',
+    fontSize: '16px'
+  },
+  errorText: {
+    color: '#dc2626',
+    fontSize: '14px',
+    lineHeight: '1.5'
+  },
+  resultsCard: {
+    background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,249,255,0.95) 100%)',
+    backdropFilter: 'blur(20px)',
+    borderRadius: '20px',
+    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+    border: '1px solid rgba(255, 255, 255, 0.3)',
+    padding: '40px'
+  },
+  resultsHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: '30px',
+    flexWrap: 'wrap',
+    gap: '20px'
+  },
+  resultsTitle: {
+    fontSize: '2rem',
+    fontWeight: '700',
+    color: '#1f2937',
+    margin: '0'
+  },
+  gameInfo: {
+    textAlign: 'right'
+  },
+  gameName: {
+    fontSize: '1.3rem',
+    fontWeight: '600',
+    color: '#667eea',
+    margin: '0 0 5px 0'
+  },
+  gameAlias: {
+    fontSize: '14px',
+    color: '#6b7280',
+    margin: '0'
+  },
+  resultsContainer: {
+    borderRadius: '15px',
+    overflow: 'hidden',
+    border: '1px solid #e5e7eb',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
+  },
+  copyButton: {
+    background: 'none',
+    border: 'none',
+    color: 'inherit',
+    cursor: 'pointer',
+    padding: '6px',
+    borderRadius: '4px',
+    transition: 'all 0.2s ease',
+    fontSize: '14px'
+  },
+  loadingSpinner: {
+    animation: 'spin 1s linear infinite',
+    fontSize: '18px'
+  }
 };
 
-export default function Home() {
+export default function BetHistoryViewer() {
+  const [roundId, setRoundId] = useState('');
+  const [token, setToken] = useState('');
+  const [savedToken, setSavedToken] = useState('');
+  const [roundData, setRoundData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [showResults, setShowResults] = useState(false);
+  const [showToken, setShowToken] = useState(false);
+  const [tokenUpdateSuccess, setTokenUpdateSuccess] = useState(false);
+  const [focusedInput, setFocusedInput] = useState(null);
+
+  useEffect(() => {
+    const storedToken = 'demo_token_placeholder';
+    if (storedToken && storedToken !== 'demo_token_placeholder') {
+      setSavedToken(storedToken);
+      setToken(storedToken);
+    }
+  }, []);
+
+  const fetchRoundData = async () => {
+    if (!roundId.trim()) {
+      setError('Please enter a Round ID');
+      return;
+    }
+
+    if (!token && !savedToken) {
+      setError('Please enter an authorization token');
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    setShowResults(false);
+    setTokenUpdateSuccess(false);
+
+    try {
+      const response = await fetch(
+        `https://clgaming-be.pixentech.com/rgs/api/report/betHistory/${roundId}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${token || savedToken}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.code === 2300) {
+        setError('Your session has expired. Please update your token.');
+      } else if (!data || data === null) {
+        setError('Invalid Round ID or no data available for this Round ID');
+      } else {
+        setRoundData(data);
+        setShowResults(true);
+
+        if (token && token !== savedToken) {
+          setSavedToken(token);
+          setTokenUpdateSuccess(true);
+          setTimeout(() => setTokenUpdateSuccess(false), 3000);
+        }
+      }
+    } catch (err) {
+      console.error('Fetch error:', err);
+      setError(`Failed to fetch data: ${err.message}. Please check your connection and try again.`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleReset = () => {
+    setRoundId('');
+    setRoundData(null);
+    setError(null);
+    setShowResults(false);
+    setTokenUpdateSuccess(false);
+  };
+
+  const handleUpdateToken = () => {
+    if (token && token !== savedToken) {
+      setSavedToken(token);
+      setTokenUpdateSuccess(true);
+      setTimeout(() => setTokenUpdateSuccess(false), 3000);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      fetchRoundData();
+    }
+  };
+
+  const copyToClipboard = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  };
+
+  const formatTokenDisplay = (tokenStr) => {
+    if (!tokenStr) return '';
+    return tokenStr.length > 20 ? `${tokenStr.substring(0, 10)}...${tokenStr.substring(tokenStr.length - 10)}` : tokenStr;
+  };
+
+  const getInputStyle = (inputName) => ({
+    ...styles.input,
+    ...(focusedInput === inputName ? styles.inputFocus : {})
+  });
+
   return (
-    <div style={{ padding: '20px', maxWidth: '900px', margin: '0 auto' }}>
-      <SlotResultDisplay roundData={roundData} />
+    <div style={styles.container}>
+      <div style={styles.wrapper}>
+        {/* Header */}
+        <div style={styles.header}>
+          <div style={styles.headerIcon}>
+            📊
+          </div>
+          <h1 style={styles.title}>Bet History Viewer</h1>
+          <p style={styles.subtitle}>
+            Retrieve and analyze your gaming round data with ease
+          </p>
+        </div>
+
+        {/* Main Input Card */}
+        <div style={styles.card}>
+          <div style={styles.formSection}>
+            {/* Round ID Input */}
+            <div style={styles.inputGroup}>
+              <label style={styles.label}>Round ID</label>
+              <div style={{ position: 'relative' }}>
+                <span style={styles.inputIcon}>🔍</span>
+                <input
+                  type="text"
+                  value={roundId}
+                  onChange={(e) => setRoundId(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  onFocus={() => setFocusedInput('roundId')}
+                  onBlur={() => setFocusedInput(null)}
+                  placeholder="Enter Round ID (e.g., lSx5QWKsX4uSI4LV4oMjc)"
+                  style={getInputStyle('roundId')}
+                />
+              </div>
+            </div>
+
+            {/* Token Input */}
+            <div style={styles.inputGroup}>
+              <label style={styles.label}>Authorization Token</label>
+              <div style={{ position: 'relative' }}>
+                <span style={styles.inputIcon}>🔑</span>
+                <input
+                  type={showToken ? "text" : "password"}
+                  value={token}
+                  onChange={(e) => setToken(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  onFocus={() => setFocusedInput('token')}
+                  onBlur={() => setFocusedInput(null)}
+                  placeholder="Enter your Bearer token"
+                  style={getInputStyle('token')}
+                />
+                <button
+                  style={styles.toggleButton}
+                  onMouseEnter={(e) => {
+                    e.target.style.backgroundColor = '#f3f4f6';
+                    e.target.style.color = '#374151';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.backgroundColor = 'transparent';
+                    e.target.style.color = '#9ca3af';
+                  }}
+                  onClick={() => setShowToken(!showToken)}
+                >
+                  {showToken ? '👁️' : '🙈'}
+                </button>
+              </div>
+
+              {savedToken && (
+                <div style={{ ...styles.statusCard, ...styles.successCard }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span>✅</span>
+                    <span>Saved token: {formatTokenDisplay(savedToken)}</span>
+                  </div>
+                  <button
+                    onClick={() => copyToClipboard(savedToken)}
+                    style={styles.copyButton}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = 'rgba(0,0,0,0.05)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = 'transparent';
+                    }}
+                  >
+                    📋
+                  </button>
+                </div>
+              )}
+
+              {tokenUpdateSuccess && (
+                <div style={{ ...styles.statusCard, ...styles.infoCard }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span>✅</span>
+                    <span>Token updated successfully!</span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Action Buttons */}
+            <div style={styles.buttonGroup}>
+              <button
+                onClick={fetchRoundData}
+                disabled={loading}
+                style={{
+                  ...styles.button,
+                  ...styles.primaryButton,
+                  ...(loading ? styles.disabledButton : {})
+                }}
+                onMouseEnter={(e) => {
+                  if (!loading) {
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.2)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!loading) {
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                  }
+                }}
+              >
+                {loading ? (
+                  <>
+                    <span style={styles.loadingSpinner}>⟳</span>
+                    <span>Loading...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>🔍</span>
+                    <span>Fetch Round Data</span>
+                  </>
+                )}
+              </button>
+
+              <button
+                onClick={handleReset}
+                style={{ ...styles.button, ...styles.secondaryButton }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'translateY(-2px)';
+                  e.target.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.2)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'translateY(0)';
+                  e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                }}
+              >
+                <span>🔄</span>
+                <span>Reset</span>
+              </button>
+
+              {token && token !== savedToken && (
+                <button
+                  onClick={handleUpdateToken}
+                  style={{ ...styles.button, ...styles.successButton }}
+                  onMouseEnter={(e) => {
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.2)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                  }}
+                >
+                  <span>🔑</span>
+                  <span>Update Token</span>
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Error Display */}
+          {error && (
+            <div style={styles.errorCard}>
+              <span style={styles.errorIcon}>⚠️</span>
+              <div>
+                <h4 style={styles.errorTitle}>Error</h4>
+                <p style={styles.errorText}>{error}</p>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Results Display */}
+        {showResults && roundData && (
+          <div style={styles.resultsCard}>
+            <div style={styles.resultsHeader}>
+              <h2 style={styles.resultsTitle}>📈 Round Results</h2>
+              <div style={styles.gameInfo}>
+                <p style={styles.gameName}>{roundData.gameName}</p>
+                <p style={styles.gameAlias}>({roundData.gameAlias})</p>
+              </div>
+            </div>
+
+            <div style={styles.resultsContainer}>
+              <SlotResultDisplay roundData={roundData} />
+            </div>
+          </div>
+        )}
+      </div>
+
+      <style>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+          .${styles.title} {
+            fontSize: 2rem !important;
+          }
+          .${styles.card} {
+            padding: 25px !important;
+          }
+          .${styles.resultsHeader} {
+            flex-direction: column !important;
+            text-align: left !important;
+            gap: 15px !important;
+          }
+          .${styles.gameInfo} {
+            text-align: left !important;
+          }
+          .${styles.buttonGroup} {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
