@@ -868,7 +868,7 @@ const FreeSpinsView = ({
                 />
               ))}
 
-              {spin.totalMultiplier > 1 && (
+              {spin.totalMultiplier > 0 && (
                 <div className="multiplier-info">
                   <div className="multiplier-icon">⚡</div>
                   <div className="multiplier-content">
