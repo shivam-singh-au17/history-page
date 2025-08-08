@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Betting History - Gold Premium</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* Luxurious Overlay */
+        .betting-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(ellipse at center, #1a1a1a 0%, #0a0a0a 100%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        /* Golden Particle Background Effect */
+        .betting-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.02) 0%, transparent 25%),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffd700' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Golden Border Effect */
+        .betting-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid transparent;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(255, 215, 0, 0.1) 50%, rgba(255, 215, 0, 0.3) 100%) border-box;
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header Section - Luxurious Gold */
+        .header-section {
+            background: linear-gradient(135deg, rgba(20, 15, 5, 0.95) 0%, rgba(40, 30, 10, 0.98) 100%);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.4);
+            box-shadow: 0 4px 30px rgba(255, 215, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+            flex-shrink: 0;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.6), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Balance Display - Luxurious */
+        .balance-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 12px 20px;
+            background: rgba(10, 10, 10, 0.7);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .balance-info:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 215, 0, 0.15);
+        }
+
+        .balance-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 215, 0, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .balance-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            font-feature-settings: 'tnum';
+            background: linear-gradient(135deg, #ffd700 0%, #fff9c4 50%, #ffd700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
+            position: relative;
+        }
+
+        .balance-amount::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.6), transparent);
+        }
+
+        /* Title Section - Regal */
+        .title-section {
+            text-align: center;
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .main-title {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffd700 0%, #fff9c4 50%, #ffd700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            margin-bottom: 6px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .main-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            border-radius: 2px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: rgba(255, 215, 0, 0.7);
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        /* Close Button - Elegant */
+        .close-button {
+            width: 48px;
+            height: 48px;
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 245, 157, 0.05) 100%);
+            color: #ffd700;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 300;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .close-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .close-button:hover {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 245, 157, 0.15) 100%);
+            border-color: rgba(255, 215, 0, 0.8);
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 6px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .close-button:hover::before {
+            left: 100%;
+        }
+
+        /* Tabs Section - Premium */
+        .tabs-section {
+            padding: 25px 40px 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .tabs-container {
+            display: flex;
+            background: rgba(15, 15, 15, 0.8);
+            border-radius: 16px;
+            padding: 6px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tabs-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4), transparent);
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 18px 24px;
+            background: transparent;
+            color: rgba(255, 215, 0, 0.7);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .tab-button small {
+            display: block;
+            font-size: 11px;
+            opacity: 0.8;
+            margin-top: 4px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .tab-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 245, 157, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .tab-button:hover {
+            color: rgba(255, 215, 0, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .tab-button:hover::before {
+            opacity: 1;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(255, 235, 59, 0.8) 50%, rgba(255, 215, 0, 0.9) 100%);
+            color: #111;
+            box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4);
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: #ffd700;
+            border-radius: 3px;
+            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.6);
+        }
+
+        /* Content Section - Luxurious Table */
+        .content-section {
+            flex: 1;
+            padding: 0 40px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .table-container {
+            background: rgba(15, 15, 15, 0.7);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            overflow: hidden;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .table-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08) 0%, rgba(40, 30, 10, 0.2) 100%);
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 0.8fr auto;
+            gap: 20px;
+            padding: 20px 30px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+            font-weight: 700;
+            font-size: 12px;
+            color: rgba(255, 215, 0, 0.9);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            align-items: center;
+            justify-items: center;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .table-header>div:first-child {
+            justify-self: start;
+            text-align: left;
+        }
+
+        .table-body {
+            overflow-y: auto;
+            overflow-x: hidden;
+            flex: 1;
+        }
+
+        /* Bet Row - Luxurious Design */
+        .bet-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 0.8fr auto;
+            gap: 20px;
+            padding: 20px 30px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            background: rgba(20, 20, 20, 0.5);
+        }
+
+        .bet-row:nth-child(odd) {
+            background: rgba(25, 25, 25, 0.5);
+        }
+
+        .bet-row::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 215, 0, 0.08) 50%, transparent 100%);
+            transition: left 0.7s ease;
+            z-index: -1;
+        }
+
+        .bet-row:hover {
+            background: rgba(255, 215, 0, 0.03);
+            transform: translateX(6px);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);
+        }
+
+        .bet-row:hover::before {
+            left: 100%;
+        }
+
+        /* Game Column - Elegant */
+        .game-column {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .game-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #ffd700 0%, #fff9c4 50%, #ffd700 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #111;
+            font-weight: 800;
+            font-size: 16px;
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .game-icon:hover::after {
+            left: 100%;
+        }
+
+        .game-details {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .game-name {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.5px;
+        }
+
+        .game-time {
+            color: rgba(255, 215, 0, 0.7);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        /* Bet Type Badge - Premium */
+        .bet-type {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .type-badge {
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .type-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .type-bet {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+        }
+
+        .type-bb {
+            background: linear-gradient(135deg, rgba(255, 245, 157, 0.2) 0%, rgba(255, 245, 157, 0.1) 100%);
+            color: #fff59d;
+            border: 1px solid rgba(255, 245, 157, 0.4);
+        }
+
+        /* Amount Columns - Elegant */
+        .amount-column {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 15px;
+            font-feature-settings: 'tnum';
+            letter-spacing: 0.5px;
+        }
+
+        .bet-amount {
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .win-amount.positive {
+            color: #4ade80;
+            text-shadow: 0 1px 5px rgba(74, 222, 128, 0.4);
+            position: relative;
+        }
+
+        .win-amount.positive::after {
+            content: '▲';
+            margin-left: 6px;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .win-amount.zero {
+            color: rgba(255, 215, 0, 0.5);
+        }
+
+        /* Status Indicator - Premium */
+        .status-column {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .status-indicator {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .status-indicator:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .status-win {
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.2) 0%, rgba(74, 222, 128, 0.1) 100%);
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.4);
+        }
+
+        .status-loss {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(239, 68, 68, 0.1) 100%);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+
+        /* Action Button - Elegant */
+        .actions-column {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-button {
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            background: rgba(255, 215, 0, 0.1);
+            color: rgba(255, 215, 0, 0.9);
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .action-button:hover {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .action-button:hover::before {
+            left: 100%;
+        }
+
+        /* Custom Scrollbar - Golden */
+        .table-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .table-body::-webkit-scrollbar-track {
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 4px;
+        }
+
+        .table-body::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.4) 0%, rgba(255, 215, 0, 0.6) 100%);
+            border-radius: 4px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .table-body::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.6) 0%, rgba(255, 215, 0, 0.8) 100%);
+        }
+
+        /* Animation for rows */
+        .bet-row {
+            animation: slideInRow 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes slideInRow {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stagger animation */
+        .bet-row:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .bet-row:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .bet-row:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+        .bet-row:nth-child(4) {
+            animation-delay: 0.2s;
+        }
+
+        .bet-row:nth-child(5) {
+            animation-delay: 0.25s;
+        }
+
+        .bet-row:nth-child(6) {
+            animation-delay: 0.3s;
+        }
+
+        .bet-row:nth-child(7) {
+            animation-delay: 0.35s;
+        }
+
+        .bet-row:nth-child(8) {
+            animation-delay: 0.4s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+
+            .header-content,
+            .tabs-section,
+            .content-section {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 20px 20px;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .balance-info {
+                order: 2;
+                align-items: center;
+                text-align: center;
+                padding: 10px 15px;
+            }
+
+            .title-section {
+                order: 1;
+                padding-top: 10px;
+            }
+
+            .close-button {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                width: 42px;
+                height: 42px;
+            }
+
+            .main-title {
+                font-size: 26px;
+                letter-spacing: 3px;
+            }
+
+            .tabs-section,
+            .content-section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .tab-button {
+                padding: 14px 18px;
+                font-size: 12px;
+            }
+
+            .table-header {
+                display: none;
+            }
+
+            .bet-row {
+                grid-template-columns: 1fr;
+                gap: 14px;
+                padding: 18px 22px;
+                background: rgba(25, 25, 25, 0.7) !important;
+                border-radius: 14px;
+                margin-bottom: 10px;
+                border: 1px solid rgba(255, 215, 0, 0.2);
+            }
+
+            .bet-row:hover {
+                transform: none;
+            }
+
+            .game-column {
+                grid-column: 1;
+            }
+
+            .bet-type,
+            .amount-column,
+            .status-column {
+                justify-content: flex-start;
+                padding: 10px 0;
+                border-top: 1px solid rgba(255, 215, 0, 0.1);
+            }
+
+            .actions-column {
+                justify-content: flex-end;
+                grid-column: 1;
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tabs-container {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .tab-button {
+                border-radius: 10px;
+            }
+
+            .header-content {
+                padding: 15px;
+            }
+
+            .balance-amount {
+                font-size: 20px;
+            }
+
+            .main-title {
+                font-size: 22px;
+            }
+        }
+
+        /* Golden Glow Effects */
+        .glow-gold {
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+        }
+
+        /* Floating Golden Particles (Optional) */
+        .gold-particle {
+            position: absolute;
+            background: rgba(255, 215, 0, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="betting-overlay">
+        <!-- Floating Gold Particles -->
+        <div id="goldParticles"></div>
+
+        <div class="header-section">
+            <div class="header-content">
+                <div class="balance-info">
+                    <div class="balance-label">Current Balance</div>
+                    <div class="balance-amount">₹1,09,998.77</div>
+                </div>
+                <div class="title-section">
+                    <div class="main-title">Betting History</div>
+                    <div class="subtitle">Track your gaming activity</div>
+                </div>
+                <div class="close-button" onclick="closeBettingHistory()">×</div>
+            </div>
+        </div>
+
+        <div class="tabs-section">
+            <div class="tabs-container">
+                <button class="tab-button active" onclick="switchTab(this, 'history')">
+                    Bet History
+                </button>
+                <button class="tab-button" onclick="switchTab(this, 'biggest-all')">
+                    Biggest Wins<small>All Games</small>
+                </button>
+                <button class="tab-button" onclick="switchTab(this, 'biggest-current')">
+                    Biggest Wins<small>Current Game</small>
+                </button>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <div class="table-container">
+                <div class="table-header">
+                    <div>Game</div>
+                    <div>Type</div>
+                    <div>Bet Amount</div>
+                    <div>Win Amount</div>
+                    <div>Status</div>
+                    <div>Action</div>
+                </div>
+                <div class="table-body" id="tableBody">
+                    <!-- Dynamic content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data - in real app, this would come from API
+        const bettingData = {
+            data: [
+                {
+                    "_id": "6895b2d042bbab0d152cf095",
+                    "roundId": "Pd7u0vPV0LGowQBzhywKi",
+                    "isFreeBet": true,
+                    "betType": "bb",
+                    "endTime": "2025-08-08T08:19:02.873Z",
+                    "gameName": "Mega Ace",
+                    "winAmount": 2364,
+                    "betAmount": 12000,
+                    "currencyCode": "INR",
+                    "isBigWin": true,
+                    "totalFreeSpins": 10
+                },
+                {
+                    "_id": "6895b2b242bbab0d152cf038",
+                    "roundId": "_spjXo3udofKJDVG1Y5PS",
+                    "isFreeBet": true,
+                    "betType": "bb",
+                    "endTime": "2025-08-08T08:18:17.480Z",
+                    "gameName": "Mega Ace",
+                    "winAmount": 56,
+                    "betAmount": 4000,
+                    "currencyCode": "INR",
+                    "isBigWin": true,
+                    "totalFreeSpins": 10
+                },
+                {
+                    "_id": "6895b28642bbab0d152cefdb",
+                    "roundId": "-224knLaNPWWexzIOkNuf",
+                    "isFreeBet": true,
+                    "betType": "bet",
+                    "endTime": "2025-08-08T08:17:44.871Z",
+                    "gameName": "Mega Ace",
+                    "winAmount": 582,
+                    "betAmount": 20,
+                    "currencyCode": "INR",
+                    "isBigWin": true,
+                    "totalFreeSpins": 10
+                },
+                {
+                    "_id": "6895b25642bbab0d152cef7e",
+                    "roundId": "8deM83S2PXqvQLC5aALQT",
+                    "isFreeBet": true,
+                    "betType": "bet",
+                    "endTime": "2025-08-08T08:17:03.438Z",
+                    "gameName": "Mega Ace",
+                    "winAmount": 398,
+                    "betAmount": 20,
+                    "currencyCode": "INR",
+                    "isBigWin": true,
+                    "totalFreeSpins": 10
+                },
+                {
+                    "_id": "689599a942bbab0d152ceec2",
+                    "roundId": "4SFkkotDfh1xkUHY27SrL",
+                    "isFreeBet": true,
+                    "betType": "bb",
+                    "endTime": "2025-08-08T06:31:35.961Z",
+                    "gameName": "Mega Ace",
+                    "winAmount": 168,
+                    "betAmount": 2000,
+                    "currencyCode": "INR",
+                    "isBigWin": true,
+                    "totalFreeSpins": 10
+                },
+                {
+                    "_id": "689597ef42bbab0d152cee53",
+                    "roundId": "E26rRpteYTm62zsp4e_0r",
+                    "isFreeBet": true,
+                    "betType": "bb",
+                    "endTime": "2025-08-08T06:24:29.230Z",
+                    "gameName": "Mega Ace",
+                    "winAmount": 870,
+                    "betAmount": 2500,
+                    "currencyCode": "INR",
+                    "isBigWin": true,
+                    "totalFreeSpins": 10
+                },
+                {
+                    "_id": "689597be42bbab0d152cedf6",
+                    "roundId": "sjsLfTeN3w34W5-IPS_LZ",
+                    "isFreeBet": true,
+                    "betType": "bb",
+                    "endTime": "2025-08-08T06:23:22.912Z",
+                    "gameName": "Mega Ace",
+                    "winAmount": 126,
+                    "betAmount": 2000,
+                    "currencyCode": "INR",
+                    "isBigWin": true,
+                    "totalFreeSpins": 10
+                },
+                {
+                    "_id": "6895979742bbab0d152cede9",
+                    "roundId": "Jcmy6DNhtWJX3l5of-IN6",
+                    "isFreeBet": false,
+                    "betType": "bet",
+                    "endTime": "2025-08-08T06:22:15.567Z",
+                    "gameName": "Mega Ace",
+                    "winAmount": 0,
+                    "betAmount": 20,
+                    "currencyCode": "INR",
+                    "isBigWin": false
+                },
+                {
+                    "_id": "6895979742bbab0d152ceddc",
+                    "roundId": "hef9D11Na9KqxStP8KoSq",
+                    "isFreeBet": false,
+                    "betType": "bet",
+                    "endTime": "2025-08-08T06:22:15.089Z",
+                    "gameName": "Mega Ace",
+                    "winAmount": 0,
+                    "betAmount": 20,
+                    "currencyCode": "INR",
+                    "isBigWin": false
+                },
+                {
+                    "_id": "6895979642bbab0d152cedcf",
+                    "roundId": "AKKHRef3dsXgfEAt0NMMt",
+                    "isFreeBet": false,
+                    "betType": "bet",
+                    "endTime": "2025-08-08T06:22:14.606Z",
+                    "gameName": "Mega Ace",
+                    "winAmount": 0,
+                    "betAmount": 20,
+                    "currencyCode": "INR",
+                    "isBigWin": false
+                },
+                {
+                    "_id": "6895979642bbab0d152cedc2",
+                    "roundId": "aIgj2YovtVMHLyqYapJRj",
+                    "isFreeBet": false,
+                    "betType": "bet",
+                    "endTime": "2025-08-08T06:22:14.143Z",
+                    "gameName": "Mega Ace",
+                    "winAmount": 0,
+                    "betAmount": 20,
+                    "currencyCode": "INR",
+                    "isBigWin": false
+                },
+                {
+                    "_id": "6895978f42bbab0d152cedb5",
+                    "roundId": "1oAjrUeL0ycOdoX4NTBGS",
+                    "isFreeBet": false,
+                    "betType": "bet",
+                    "endTime": "2025-08-08T06:22:07.019Z",
+                    "gameName": "Mega Ace",
+                    "winAmount": 62,
+                    "betAmount": 20,
+                    "currencyCode": "INR",
+                    "isBigWin": true
+                },
+                {
+                    "_id": "6895978e42bbab0d152ceda8",
+                    "roundId": "XRBTvNgxsdy6JOk0Mx7Xw",
+                    "isFreeBet": false,
+                    "betType": "bet",
+                    "endTime": "2025-08-08T06:22:06.539Z",
+                    "gameName": "Mega Ace",
+                    "winAmount": 0,
+                    "betAmount": 20,
+                    "currencyCode": "INR",
+                    "isBigWin": false
+                },
+                {
+                    "_id": "6895978e42bbab0d152ced9b",
+                    "roundId": "pdc1gD3XeRMH1YpIqrQhy",
+                    "isFreeBet": false,
+                    "betType": "bet",
+                    "endTime": "2025-08-08T06:22:06.098Z",
+                    "gameName": "Mega Ace",
+                    "winAmount": 0,
+                    "betAmount": 20,
+                    "currencyCode": "INR",
+                    "isBigWin": false
+                },
+                {
+                    "_id": "6895978b42bbab0d152ced8e",
+                    "roundId": "iqpGK18j7Btkm7d6NZbf2",
+                    "isFreeBet": false,
+                    "betType": "bet",
+                    "endTime": "2025-08-08T06:22:03.042Z",
+                    "gameName": "Mega Ace",
+                    "winAmount": 10,
+                    "betAmount": 20,
+                    "currencyCode": "INR",
+                    "isBigWin": false
+                },
+                {
+                    "_id": "6895978a42bbab0d152ced81",
+                    "roundId": "YgH6S5cF9XzE17cpjgTWx",
+                    "isFreeBet": false,
+                    "betType": "bet",
+                    "endTime": "2025-08-08T06:22:02.504Z",
+                    "gameName": "Mega Ace",
+                    "winAmount": 0,
+                    "betAmount": 20,
+                    "currencyCode": "INR",
+                    "isBigWin": false
+                },
+                {
+                    "_id": "6895978742bbab0d152ced74",
+                    "roundId": "ztWMeVQX9PHIb7_JA7CfJ",
+                    "isFreeBet": false,
+                    "betType": "bet",
+                    "endTime": "2025-08-08T06:21:59.936Z",
+                    "gameName": "Mega Ace",
+                    "winAmount": 4,
+                    "betAmount": 20,
+                    "currencyCode": "INR",
+                    "isBigWin": false
+                }
+            ]
+        };
+
+        // Create floating gold particles
+        function createGoldParticles() {
+            const container = document.getElementById('goldParticles');
+            const particleCount = 15;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('gold-particle');
+
+                // Random size between 1px and 3px
+                const size = Math.random() * 2 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.bottom = `-10px`;
+
+                // Random animation duration and delay
+                const duration = Math.random() * 10 + 10;
+                const delay = Math.random() * 10;
+                particle.style.animation = `float ${duration}s ${delay}s infinite linear`;
+
+                container.appendChild(particle);
+            }
+        }
+
+        // Utility functions
+        function formatCurrency(amount, currency = 'INR') {
+            return new Intl.NumberFormat('en-IN', {
+                style: 'currency',
+                currency: currency,
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            }).format(amount).replace('₹', '₹');
+        }
+
+        function formatDateTime(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleString('en-IN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            });
+        }
+
+        function getGameIcon(gameName) {
+            const words = gameName.split(' ');
+            if (words.length >= 2) {
+                return words[0][0] + words[1][0];
+            }
+            return gameName.substring(0, 2);
+        }
+
+        // Render betting history
+        function renderBettingHistory(data) {
+            const tableBody = document.getElementById('tableBody');
+
+            const rows = data.map(bet => {
+                const isWin = bet.winAmount > 0;
+                const gameIcon = getGameIcon(bet.gameName);
+
+                return `
+                    <div class="bet-row" onclick="showBetDetails('${bet._id}')">
+                        <div class="game-column">
+                            <div class="game-icon">${gameIcon}</div>
+                            <div class="game-details">
+                                <div class="game-name">${bet.gameName}</div>
+                                <div class="game-time">${formatDateTime(bet.endTime)}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="bet-type">
+                            <span class="type-badge type-${bet.betType}">${bet.betType.toUpperCase()}</span>
+                        </div>
+                        
+                        <div class="amount-column bet-amount">
+                            ${formatCurrency(bet.betAmount, bet.currencyCode)}
+                        </div>
+                        
+                        <div class="amount-column win-amount ${isWin ? 'positive' : 'zero'}">
+                            ${formatCurrency(bet.winAmount, bet.currencyCode)}
+                        </div>
+                        
+                        <div class="status-column">
+                            <span class="status-indicator ${isWin ? 'status-win' : 'status-loss'}">
+                                ${isWin ? 'WIN' : 'LOSS'}
+                            </span>
+                        </div>
+                        
+                        <div class="actions-column">
+                            <button class="action-button" onclick="event.stopPropagation(); showBetDetails('${bet._id}')">
+                                ›
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            tableBody.innerHTML = rows;
+        }
+
+        // Tab switching
+        function switchTab(tabElement, tabType) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-button').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Add active class to clicked tab
+            tabElement.classList.add('active');
+
+            // Handle different tab content
+            switch (tabType) {
+                case 'history':
+                    renderBettingHistory(bettingData.data);
+                    break;
+                case 'biggest-all':
+                    // Filter and sort by biggest wins across all games
+                    const allBigWins = bettingData.data
+                        .filter(bet => bet.winAmount > 0)
+                        .sort((a, b) => b.winAmount - a.winAmount);
+                    renderBettingHistory(allBigWins);
+                    break;
+                case 'biggest-current':
+                    // Filter by current game (assuming Mega Ace is current)
+                    const currentGameWins = bettingData.data
+                        .filter(bet => bet.gameName === 'Mega Ace' && bet.winAmount > 0)
+                        .sort((a, b) => b.winAmount - a.winAmount);
+                    renderBettingHistory(currentGameWins);
+                    break;
+            }
+        }
+
+        // Show bet details
+        function showBetDetails(betId) {
+            const bet = bettingData.data.find(b => b._id === betId);
+            if (bet) {
+                console.log('Showing details for bet:', bet);
+                // In a real application, this would open a modal or navigate to details page
+                alert(`Bet Details:\nGame: ${bet.gameName}\nRound ID: ${bet.roundId}\nBet: ${formatCurrency(bet.betAmount)}\nWin: ${formatCurrency(bet.winAmount)}`);
+            }
+        }
+
+        // Close betting history
+        function closeBettingHistory() {
+            const overlay = document.querySelector('.betting-overlay');
+            overlay.style.opacity = '0';
+            overlay.style.transform = 'translateY(20px)';
+
+            setTimeout(() => {
+                console.log('Betting history closed');
+                // In a real application, this would close the overlay or navigate back
+            }, 400);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeBettingHistory();
+            }
+
+            // Tab navigation with numbers
+            if (e.key >= '1' && e.key <= '3') {
+                const tabIndex = parseInt(e.key) - 1;
+                const tabs = document.querySelectorAll('.tab-button');
+                if (tabs[tabIndex]) {
+                    tabs[tabIndex].click();
+                }
+            }
+        });
+
+        // Initialize the component
+        document.addEventListener('DOMContentLoaded', function () {
+            // Create gold particles
+            createGoldParticles();
+
+            // Render initial betting history
+            renderBettingHistory(bettingData.data);
+
+            // Add smooth scrolling behavior
+            const tableBody = document.getElementById('tableBody');
+            let scrollTimeout;
+
+            tableBody.addEventListener('scroll', function () {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    // Optional: Add scroll-based effects here
+                }, 150);
+            });
+
+            // Performance optimization: Use passive event listeners
+            tableBody.addEventListener('wheel', function (e) {
+                // Custom smooth scrolling can be added here if needed
+            }, { passive: true });
+
+            // Initialize with fade-in animation
+            setTimeout(() => {
+                document.querySelector('.betting-overlay').style.opacity = '1';
+            }, 50);
+        });
+
+        // Export functions for external use (if needed)
+        window.BettingHistoryComponent = {
+            render: renderBettingHistory,
+            switchTab: switchTab,
+            close: closeBettingHistory,
+            showDetails: showBetDetails
+        };
+
+        console.log('Premium Betting History Component initialized successfully');
+    </script>
+</body>
+
+</html>
