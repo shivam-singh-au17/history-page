@@ -868,7 +868,7 @@ const FreeSpinsView = ({
                 />
               ))}
 
-              {spin.totalMultiplier > 0 && (
+              {spin.totalMultiplier > 0 && spin.totalWin > 0 && (
                 <div className="multiplier-info">
                   <div className="multiplier-icon">⚡</div>
                   <div className="multiplier-content">
@@ -877,6 +877,20 @@ const FreeSpinsView = ({
                     </span>
                     <span className="multiplier-value">
                       {spin.totalMultiplier}x
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {spin.totalWin > 0 && (
+                <div className="multiplier-info">
+                  <div className="multiplier-icon">🪙</div>
+                  <div className="multiplier-content">
+                    <span className="multiplier-label">
+                      Spin Total Win Amount
+                    </span>
+                    <span className="multiplier-value">
+                      {currency} {spin.totalWin.toFixed(2)}
                     </span>
                   </div>
                 </div>
