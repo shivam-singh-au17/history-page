@@ -757,6 +757,18 @@ const BaseGameView = ({
         />
       ))}
 
+      {totalWin > 0 && (
+        <div className="multiplier-info">
+          <div className="multiplier-icon">🪙</div>
+          <div className="multiplier-content">
+            <span className="multiplier-label">Total Base Win Amount</span>
+            <span className="multiplier-value">
+              {currency} {totalWin.toFixed(2)}
+            </span>
+          </div>
+        </div>
+      )}
+
       <style jsx>{`
         .base-game-container {
           animation: slideInLeft 0.5s ease-out;
@@ -794,6 +806,43 @@ const BaseGameView = ({
           color: #64748b;
           font-size: 14px;
           margin: 0;
+        }
+
+        .multiplier-info {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          margin-top: 20px;
+          padding: 16px;
+          background: linear-gradient(
+            135deg,
+            rgba(245, 158, 11, 0.08) 0%,
+            rgba(217, 119, 6, 0.08) 100%
+          );
+          border-radius: 12px;
+          border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .multiplier-icon {
+          font-size: 24px;
+          color: #f59e0b;
+        }
+
+        .multiplier-content {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .multiplier-label {
+          font-weight: 600;
+          color: #d97706;
+          font-size: 14px;
+        }
+
+        .multiplier-value {
+          font-weight: 800;
+          color: #f59e0b;
+          font-size: 20px;
         }
       `}</style>
     </div>
