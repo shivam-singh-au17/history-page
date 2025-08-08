@@ -45,6 +45,7 @@ const SlotResultDisplay = ({ roundData }) => {
               scatterPositions: cascade.scatterPositions || [],
             })),
             totalWin: baseData.totalWin || 0,
+            multiplier: baseData.multiplier || 0,
           }
         : null,
       freeSpins: freeSpinsData.map((spin, index) => ({
@@ -214,6 +215,7 @@ const SlotResultDisplay = ({ roundData }) => {
           <BaseGameView
             reelViews={gameData.baseGame.reelViews}
             totalWin={gameData.baseGame.totalWin}
+            multiplier={gameData.baseGame.multiplier}
             currency={gameData.currency}
             onSymbolHighlight={handleSymbolHighlight}
             highlightedSymbol={highlightedSymbol}
@@ -729,6 +731,7 @@ const SlotResultDisplay = ({ roundData }) => {
 const BaseGameView = ({
   reelViews,
   totalWin,
+  multiplier,
   currency,
   onSymbolHighlight,
   highlightedSymbol,
@@ -749,8 +752,8 @@ const BaseGameView = ({
           onSymbolHighlight={onSymbolHighlight}
           highlightedSymbol={highlightedSymbol}
           isBaseGame={true}
-          totalMultiplier={0}
-          totalWin={0}
+          totalMultiplier={multiplier}
+          totalWin={totalWin}
         />
       ))}
 
@@ -1167,13 +1170,13 @@ const TumbleView = ({
           <div className="summary-item">
             <div className="summary-label">Multiplier</div>
             <div className="summary-value multiplier">
-              {totalMultiplier > 0 ? `${totalMultiplier}x` : "1x"}
+              {`${totalMultiplier}x`}
             </div>
           </div>
           <div className="summary-item total">
             <div className="summary-label">Total Win</div>
             <div className="summary-value total-value">
-              {currency} {totalWin.toFixed(2)}
+              {currency} {(reelData.winAmount * totalMultiplier).toFixed(2)}
             </div>
           </div>
         </div>
