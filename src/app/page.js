@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import SlotResultDisplay from "./SlotResultDisplayv6";
+// import SlotResultDisplay from "./SlotResultDisplayv6";
+import MegaAceSlotResultDisplay from "./megaAceSlotResultDisplay";
 
 const styles = {
   container: {
@@ -226,8 +227,9 @@ export default function BetHistoryViewer() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            gameId: "6889b9296c7cb0201b67b48b",
-            userId: "shivam",
+            // gameId: "6889b9296c7cb0201b67b48b",
+            gameId: "6867b4bee6142dd06b872625",
+            userId: "singh",
             token: "abcd",
             currency: "INR",
             gameMode: "R3"
@@ -448,6 +450,7 @@ export default function BetHistoryViewer() {
 
             <div style={styles.resultsContainer}>
               <SlotResultDisplay roundData={roundData} />
+              {/* <MegaAceSlotResultDisplay roundData={roundData} /> */}
             </div>
           </div>
         )}
